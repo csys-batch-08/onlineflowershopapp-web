@@ -70,7 +70,7 @@ background-size:cover;
 
 
 </tr>
-
+<h1>hlo</h1>
 
 </table>
 </c:forEach>
