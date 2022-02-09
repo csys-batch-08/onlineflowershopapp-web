@@ -60,10 +60,10 @@ margin-top:200px;
  
 
 
-<form action="RatingHere.jsp" metohd="post">
+<form action="ratingHere.jsp" metohd="post">
 <button type="submit" name="button">Rating</button><br><br>
 
-<a href="MyCart.jsp">My Order</a>
+<a href="myCart.jsp">My Order</a>
 
 
 </form>

@@ -71,25 +71,21 @@ a {
 
 </style>
 </head>
+<body>
 
-<form action="Login" method="post" >
+<form action="LogInServlet" method="post" >
 
 
 <div class="container">
 
 <div class="card">
 
-<%String msg=(String)session.getAttribute("Invalid"); 
- if(msg!=null){
-	 %>
-	 <h2><%=msg %></h2>
-	 <%session.removeAttribute("Invalid"); %>
- <% } %>
 
 
 
-<input type="emailId"    name="emailId" placeholder="Email_id" pattern="[A-Za-z0-9]+[@][a-zA-Z]+[.][a-z]+" autofocus Required><br><br>
-<input type="password" name="password" placeholder="Password" pattern="[a-z0-9]{8}"   Required><br><br>
+
+<input type="email"    name="emailId" placeholder="Email_id" pattern="[A-Za-z0-9]+[@][a-zA-Z]+[.][a-z]+" autofocus Required><br><br>
+<input type="password" name="password" placeholder="Password"   Required><br><br>
 
 <button type="submit" id="button">Login</button><br><br>
 

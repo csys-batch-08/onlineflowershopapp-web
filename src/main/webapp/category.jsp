@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.sql.*" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="java.sql.ResultSet" import="com.onlineflowershop.dao.impl.ProductDAOImpl"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,8 +47,8 @@ margin-top: 100px;
 
 
    
-   <a href="MyCart.jsp">My Order</a>    
-   <a href="Home.jsp">Back To Home</a>
+   <a href="myCart.jsp">My Order</a>    
+   <a href="home.jsp">Back To Home</a>
 </div>
 
 
@@ -56,11 +57,6 @@ margin-top: 100px;
 
 
 <form>
-<%
-ProductDAOImpl productDao=new ProductDAOImpl();
-ResultSet rs=productDao.ShowCategory();
-
-%>
 
 <table align="center" border="3">
 
@@ -68,17 +64,18 @@ ResultSet rs=productDao.ShowCategory();
 <th><h3>Buy Product</h3></th>
 
 
-<%while(rs.next()) {%>
-
+<c:forEach var="show" items="${showCategory}">
 <tr>
 
-<td><%=rs.getString(1)%></td>
 
-<td><button><a href="CategoryFilter.jsp?categoryname=<%=rs.getString(1)%>">Buy</a></button></button></button>
+<td>${show.categoryName}</td>
+
+<td><button><a href="categoryFilter.jsp?categoryname=${show.categoryName}">Buy</a></button></button></button>
 
 </td>
 </tr>
-<%} %>
+<c:forEach>
+
 </table>
 
 

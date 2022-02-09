@@ -14,6 +14,7 @@ import com.onlineflowershop.util.ConnectionUtil;
 
 public class UserDAOImpl implements UserDAO {
 
+	@Override
 	public void insertUser(User user) {
 		String insertQuery = "insert into User_Details(name,email_id,Password,address,mobile_number) values(?,?,?,?,?)";
 
@@ -40,41 +41,43 @@ public class UserDAOImpl implements UserDAO {
 
 //validate user method	
 
+	@Override
 	public User validateUser(String emailId, String password) {
 		String validateQuery = "select * from user_details where email_id='" + emailId + "'and password='" + password
 				+ "'";
 
-		Connection con = ConnectionUtil.getDbConnection();
-		User user = null;
 		try {
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(validateQuery);
+
+			Connection con = ConnectionUtil.getDbConnection();
+			PreparedStatement st = con.prepareStatement(validateQuery);
+			ResultSet rs = st.executeQuery();
 			if (rs.next()) {
-				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+				User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getLong(6), rs.getString(7), rs.getDouble(8));
-						
-						return user;
+
+				return user;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			e.getMessage();
 			System.err.println("Statement error");
 		}
-		return user;
+		return null;
 	}
 
 	// show all user method
-       public List<User> showUser(){
-    	   
-    	   List<User> userlist=new ArrayList<User>();
-    	   
-    	   String showQuery="select user_id,name,email_id,password,address,mobile_number,role,walllet";
-    	   Connection con=ConnectionUtil.getDbConnection();
-    	   try {
-			Statement stmt=con.createStatement();
-			ResultSet rs=stmt.executeQuery(showQuery);
-			while(rs.next()) {
-				User user=new User();
+	@Override
+	public List<User> showUser() {
+
+		List<User> userlist = new ArrayList<User>();
+
+		String showQuery = "select user_id,name,email_id,password,address,mobile_number,role,walllet";
+		Connection con = ConnectionUtil.getDbConnection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(showQuery);
+			while (rs.next()) {
+				User user = new User();
 				user.setUserId(rs.getInt(1));
 				user.setName(rs.getString(2));
 				user.setEmailId(rs.getString(3));
@@ -83,21 +86,19 @@ public class UserDAOImpl implements UserDAO {
 				user.setMobileNumber(rs.getLong(6));
 				user.setRole(rs.getString(7));
 				user.setWallet(rs.getDouble(8));
-				
+
 				userlist.add(user);
-				
-				
-				
+
 			}
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-    	   return userlist;
-       }
-	
-	
+		return userlist;
+	}
+
 	// update user
+	@Override
 	public void update(String update) {
 		String updateQuery = "update user_details set password=?  where email_id=?";
 
@@ -118,6 +119,7 @@ public class UserDAOImpl implements UserDAO {
 
 	// delete method
 
+	@Override
 	public void deletedetails(String delete) {
 		String deleteQuery = "delete from user_details where email_id=?";
 
@@ -136,6 +138,7 @@ public class UserDAOImpl implements UserDAO {
 
 	// find user id method
 
+	@Override
 	public int findUserId(String Name) {
 
 		String findUserID = "select user_id from user_details where name='" + Name + "'";
@@ -161,6 +164,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 //get wallet balance:
+	@Override
 	public ResultSet walletbal(int id) {
 		ResultSet rs = null;
 		try {
@@ -179,6 +183,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	// update wallet balance:
+	@Override
 	public int updatewallet(int amount, int userid) {
 
 		Connection con = ConnectionUtil.getDbConnection();

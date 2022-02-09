@@ -4,8 +4,11 @@
      pageEncoding="ISO-8859-1" import ="com.onlineflowershop.dao.impl.*" %>
      
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+     
+     
+     
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <style type="text/css">
 table, th, td {
@@ -106,18 +109,19 @@ background-size:cover;
 <c:forEach var="view" items="${viewProduct}">
 
 <tr>
-
+<td><img src="${view.picture}" alt="#alter" width="200" height="200"></td>
 <td>${view.flowerName}</td>
 <td>${view.flowerDescription}</td>
 <td>${view.color}</td>
 <td>${view.retailPrice}</td>
-<td>${view.categoryName}</td>
+<td>${view.catName}</td>
 <td>${view.rating}</td>
-<td>button class="button button1"><a href="order?flowerId=${view.flowerId}&flowerName=${view.flowerName}&retailPrice=${view.retailPrice}"style="text-decoration:none;">Buy</a></button></td>
+<td><button class="button button1"><a href="order?flowerId=${view.flowerId}&flowerName=${view.flowerName}&retailPrice=${view.retailPrice}"style="text-decoration:none;">Buy</a></button></td>
 </tr>
+</c:forEach>
 
 </table>
-</c:forEach>
+
 
 </div>
 </form>

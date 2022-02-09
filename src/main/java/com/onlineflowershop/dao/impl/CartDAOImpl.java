@@ -1,8 +1,6 @@
 package com.onlineflowershop.dao.impl;
 
-
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,10 +14,11 @@ import com.onlineflowershop.util.ConnectionUtil;
 
 public class CartDAOImpl implements CartDAO {
 
+	@Override
 	public void insertCart(Cart cart) {
 		ProductDAOImpl proDao = new ProductDAOImpl();
 		UserDAOImpl userDao = new UserDAOImpl();
-		
+
 		String insert = "insert into cart_items(flower_id,user_id,order_quantity,total_price) values(?,?,?,?)";
 
 		ConnectionUtil connectionutil = new ConnectionUtil();
@@ -30,55 +29,53 @@ public class CartDAOImpl implements CartDAO {
 			pst = connection.prepareStatement(insert);
 			pst.setInt(1, cart.getProductId());
 			pst.setInt(2, cart.getUserId());
-            pst.setInt(3, cart.getOrderQuantity());
+			pst.setInt(3, cart.getOrderQuantity());
 			pst.setDouble(4, cart.getTotalPrice());
 			pst.executeUpdate();
 			System.out.println("Value inserted Successfully");
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 			System.err.println("Value not inserted in the table");
 		}
 	}
 
-	//view cart items
+	// view cart items
 
-		public  List<Cart> showCart(){	
-			List<Cart> cartlist=new ArrayList <Cart>();
-			
-			
-			String query ="select flower_id,count(order_quantity),sum(total_price),user_id,trunc(order_date) from cart_items group by flower_id,user_id ,trunc(order_date)order by trunc(order_date) desc";
-			Connection con = ConnectionUtil.getDbConnection();	
-				
-			
-			
-			try {
-					Statement stmt = con.createStatement();
-				    ResultSet rs=stmt.executeQuery(query);
-				    while(rs.next()) {
-				    	
-				    	Cart flower=new Cart();
-				    	flower.setProductId(rs.getInt(1));
-				    	flower.setOrderQuantity(rs.getInt(2));
-				    	flower.setTotalPrice(rs.getDouble(3));
-				    	flower.setUserId(rs.getInt(4));
-				    	flower.setOrderDate(rs.getDate(5));
-				    	
-				    	cartlist.add(flower);
-				    	
-				    	
-				    }
-			} catch (Exception e) {
-				e.printStackTrace();
+	@Override
+	public List<Cart> showCart() {
+		List<Cart> cartlist = new ArrayList<Cart>();
+
+		String query = "select flower_id,count(order_quantity),sum(total_price),user_id,trunc(order_date) from cart_items group by flower_id,user_id ,trunc(order_date)order by trunc(order_date) desc";
+		Connection con = ConnectionUtil.getDbConnection();
+
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+
+				Cart flower = new Cart();
+				flower.setProductId(rs.getInt(1));
+				flower.setOrderQuantity(rs.getInt(2));
+				flower.setTotalPrice(rs.getDouble(3));
+				flower.setUserId(rs.getInt(4));
+				flower.setOrderDate(rs.getDate(5));
+
+				cartlist.add(flower);
+
 			}
-			return cartlist;
+		} catch (Exception e) {
+			e.getMessage();
 		}
+		return cartlist;
+	}
 
-		// update cart
-		public  void updateCart(String updateCart) {
-			String updateQuery = "update cart_items set order_quantity =? where cart_id=?";
-	      
-			try {
+	// update cart
+	@Override
+	public void updateCart(String updateCart) {
+		String updateQuery = "update cart_items set order_quantity =? where cart_id=?";
+
+		try {
 			Connection con = ConnectionUtil.getDbConnection();
 			PreparedStatement pstmt = con.prepareStatement(updateQuery);
 			pstmt.setInt(1, Integer.parseInt(updateCart.split(",")[0]));
@@ -87,18 +84,19 @@ public class CartDAOImpl implements CartDAO {
 			System.out.println(i + "row updated");
 			pstmt.close();
 			con.close();
-			}catch(SQLException e) {
-				
-				e.printStackTrace();
-			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
 		}
+	}
 
-		// delete cart
+	// delete cart
 
-		public  void deleteCart(String delete)  {
-			String deleteQuery = "delete from cart_items where cart_id=?";
+	@Override
+	public void deleteCart(String delete) {
+		String deleteQuery = "delete from cart_items where cart_id=?";
 
-			try {
+		try {
 			Connection con = ConnectionUtil.getDbConnection();
 			PreparedStatement pstmt = con.prepareStatement(deleteQuery);
 			pstmt.setInt(1, Integer.parseInt(delete));
@@ -106,124 +104,141 @@ public class CartDAOImpl implements CartDAO {
 			System.out.println(i + "row deleted");
 			pstmt.close();
 			con.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		}
+	}
+
+	// find cart id
+
+	@Override
+	public int findCartId(int cart) {
+		String query = "select cart_id from product_details where user_id=?";
+
+		Connection con = ConnectionUtil.getDbConnection();
+		int cartId = 0;
+		try {
+			PreparedStatement pre = con.prepareStatement(query);
+			pre.setInt(1, cartId);
+			ResultSet rs = pre.executeQuery(query);
+			if (rs.next()) {
+				cartId = rs.getInt(1);
 			}
-			catch(SQLException e) {
-				
-				e.printStackTrace();
-				
-			}
+			System.out.println(cartId);
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
 		}
 
-	// find cart id		
+		return cartId;
 
-		public  int findCartId(int cart) {
-			String query = "select cart_id from product_details where user_id=?";
+	}
+
+	// get wallet balance:
+	@Override
+	public int walletbal(int id) {
+		Connection connection = ConnectionUtil.getDbConnection();
+		String query = "select user_wallet from user_details where user_id = ?";
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(query);
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		try {
+			statement.setInt(1, id);
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		ResultSet rs = null;
+
+		try {
+			while (rs.next()) {
+				try {
+					return rs.getInt(1);
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				}
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	// update wallet balance:
+	@Override
+	public int updatewallet(int amount, int userid) {
+		int res = 0;
+
+		try {
 
 			Connection con = ConnectionUtil.getDbConnection();
-			int cartId = 0;
-			try {
-				PreparedStatement pre = con.prepareStatement(query);
-				pre.setInt(1, cartId);
-				ResultSet rs = pre.executeQuery(query);
-				if (rs.next()) {
-					cartId = rs.getInt(1);
-				}
-				System.out.println(cartId);
+			String query = "update user_details set user_wallet = ? where user_id = ?";
+			PreparedStatement statement = con.prepareStatement(query);
+			statement.setInt(1, amount);
+			statement.setInt(2, userid);
+			res = statement.executeUpdate();
+			statement.executeUpdate("commit");
 
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			}
+		} catch (SQLException e) {
 
-			return cartId;
+			e.printStackTrace();
 
 		}
-		
-		//get wallet balance:
-			public int walletbal (int id)  
-			{
-				Connection connection = ConnectionUtil.getDbConnection();
-				String query = "select user_wallet from user_details where user_id = ?";
-				PreparedStatement statement = null;
-				try {
-					statement = connection.prepareStatement(query);
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-				try {
-					statement.setInt(1, id);
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-				ResultSet rs = null;
-				
-				try {
-					while(rs.next()) {
-							try {
-								return rs.getInt(1);
-							} catch (SQLException e) {
-								
-								e.printStackTrace();
-							}
-					}
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-				return -1;
-			}
+		return res;
 
-		//update wallet balance:
-			public int updatewallet(int amount,int userid) {
-				int res=0;
-			
-				try {
-					
-				
-				Connection con = ConnectionUtil.getDbConnection();
-				String query = "update user_details set user_wallet = ? where user_id = ?";
-				PreparedStatement statement = con.prepareStatement(query);
-				statement.setInt(1,amount);
-				statement.setInt(2, userid);
-				 res = statement.executeUpdate();
-				 statement.executeUpdate("commit");
-				 
-				}catch (SQLException e) {
-					
-					e.printStackTrace();
-					
+	}
+
+	@Override
+	public List<Cart> showUserCart(int userId) throws SQLException {
+
+		List<Cart> orderlist = new ArrayList<Cart>();
+		String userCart = "select cart_id,email_id,flower_name,order_quantity,total_price,order_date from cart_items inner join user_details using (user_id)inner join inventory using(flower_id) where user_id=?";
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		ResultSet rs = null;
+		try {
+			con = ConnectionUtil.getDbConnection();
+			pstmt = con.prepareStatement(userCart);
+			pstmt.setInt(1, userId);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+
+				Cart cart = new Cart();
+				cart.setCartId(rs.getInt(1));
+				cart.setEmailId(rs.getString(2));
+				cart.setFlowerName(rs.getString(3));
+				cart.setOrderQuantity(rs.getInt(4));
+				cart.setTotalPrice(rs.getDouble(5));
+				cart.setOrderDate(rs.getDate(6));
+				orderlist.add(cart);
 
 			}
-				return res;
-		
-			
+		} catch (SQLException e) {
+
+			e.getMessage();
+		} finally {
+			if (pstmt != null) {
+				pstmt.close();
 			}
-			
-			public ResultSet showUserCart(int userId) {
-				String query = "select email_id,flower_name,order_quantity,total_price,order_date from cart_items inner join user_details using (user_id)inner join inventory using(flower_id) where user_id=?" ; 
-						
-				
-				Connection con=ConnectionUtil.getDbConnection();
-				PreparedStatement stmt;
-				
-				ResultSet rs=null;
-				try {
-					stmt=con.prepareStatement(query);
-					System.out.println(userId);
-					stmt.setInt(1,userId) ;
-					
-					rs=stmt.executeQuery();	
-					return rs;
-				} catch (SQLException e) {
-					
-				
-				return rs;
-				
+			if (con != null) {
+				con.close();
 			}
 
+		}
 
-			}
+		return orderlist;
 
+	}
 }

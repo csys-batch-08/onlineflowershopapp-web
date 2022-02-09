@@ -1,7 +1,10 @@
 <%@page import="java.util.List" import ="java.sql.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
      import ="com.onlineflowershop.dao.impl.*" import="com.onlineflowershop.model.*" pageEncoding="ISO-8859-1"%>
+     
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+     
+     
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,6 +53,7 @@ background-size:cover;
 <meta charset="ISO-8859-1">
 <title>ShowUser page</title>
 </head>
+<h1> hello </h1>
 <body>
 <div class="topnav" >
 

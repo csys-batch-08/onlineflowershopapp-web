@@ -42,10 +42,10 @@ color: black;
 <body>
 <center><h1><i>Welcome To My Bloom Shop</i></h1></center>
 <div class="topnav" >
-  <a class="active" href="Login.jsp">Login</a>
-  <a href="Register.jsp">Register</a>
-  <a href="AboutUs.jsp">About Us</a>
-  <a herf="CheckWallet">Recharge Wallet</a>
+  <a class="active" href="login.jsp">Login</a>
+  <a href="register.jsp">Register</a>
+  <a href="aboutUs.jsp">About Us</a>
+  <a herf="checkWallet">Recharge Wallet</a>
 
  
   

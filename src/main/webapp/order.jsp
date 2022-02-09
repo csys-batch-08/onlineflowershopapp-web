@@ -54,15 +54,13 @@ background-size:cover;
 	System.out.println("Order Flower Name: "+flowerName);
 	session.setAttribute("flowername", flowerName);
 	
-ProductDAOImpl productDao=new ProductDAOImpl();
-ResultSet rs=productDao.findPrice(flowerId);
+
 
 
 
 String name=session.getAttribute("username").toString();
-//System.out.println(name);
 
-%>
+
 <center>
 <fieldset id="box">
 <form action="OrderServlet" method="post">
@@ -82,7 +80,7 @@ Quantity:<input type="number" name="quantity" pattern=[0-9]{2} min=0 required><b
 								
 <button type="submit" id="button">Buy</button>
 				
-<%} %>
+
 			
 </form>
 </fieldset>

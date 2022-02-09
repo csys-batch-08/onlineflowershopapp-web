@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="java.sql.ResultSet"  import="com.onlineflowershop.dao.impl.CartDAOImpl"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,13 +55,6 @@ background-size:cover;
 <a href="Home.jsp">LogOut</a>
 
 </div>
-<% 
-int userId=Integer.parseInt(session.getAttribute("userId").toString());
-System.out.println(userId);
-
-CartDAOImpl cartDao=new CartDAOImpl();
-ResultSet rs=cartDao.showUserCart(userId);
-%>
 
 <form>
 <table align="center">
@@ -73,26 +67,17 @@ ResultSet rs=cartDao.showUserCart(userId);
 
 </tr>
 
-<% String emailId=session.getAttribute("currentUser").toString();%>
+<c:forEach var="show" items="${viewOrder}">
 
-<%while(rs.next()){%>
 <tr>
-<td><%= rs.getString(1) %></td>
-<td><%= rs.getString(2) %></td>
-<td><%= rs.getInt(3) %></td>
-<td><%= rs.getDouble(4) %></td>
+<td>${show.userName}</td>
+<td>${show.flowerName}</td>
+<td>${show.orderQuantity}</td>
+<td>${show.totalPrice}</td>
 
 </tr>
-<%} %>
+</c:forEach>
 </table>
-
-
-
-
-
-
-
-
 
 
 </form>

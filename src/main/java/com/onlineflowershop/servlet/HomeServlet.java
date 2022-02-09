@@ -13,51 +13,53 @@ import javax.servlet.http.HttpSession;
 import com.onlineflowershop.dao.impl.ProductDAOImpl;
 import com.onlineflowershop.model.Product;
 
-
-
 /**
  * Servlet implementation class HomeServlet
  */
-@WebServlet("/Home")
+@WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-	
-    public HomeServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	public HomeServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ProductDAOImpl proDao = new ProductDAOImpl();
 
 		List<Product> productsList = (List<Product>) proDao.viewProduct();
 		for (int i = 0; i < productsList.size(); i++) {
 			System.out.println(productsList.get(i));
-			
 
-		}	
-		
-		HttpSession session=request.getSession();
+		}
+
+		HttpSession session = request.getSession();
 		session.setAttribute("productsList", productsList);
 		response.sendRedirect("home.jsp");
-		
-		
+
 		doGet(request, response);
 	}
 
