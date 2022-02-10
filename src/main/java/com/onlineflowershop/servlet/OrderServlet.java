@@ -52,11 +52,11 @@ public class OrderServlet extends HttpServlet {
 		int flowerId = Integer.parseInt(session.getAttribute("flower_id").toString());
 		session.setAttribute("flower_id", flowerId);
 
-		Cart cart = new Cart(flowerId, userId, quantity, totalPrice);
-
-		CartDAOImpl cartDao = new CartDAOImpl();
-		cartDao.insertCart(cart);
-		response.sendRedirect("orderSuccess.jsp");
+//		Cart cart = new Cart(0,flowerId,null,userId,name,null,quantity, totalPrice,);
+//
+//		CartDAOImpl cartDao = new CartDAOImpl();
+//		cartDao.insertCart(cart);
+//		response.sendRedirect("orderSuccess.jsp");
 
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import ="java.sql.*" import ="com.onlineflowershop.dao.impl.*"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,12 +29,7 @@ background-size:cover;
 
 
 
-<%
-String categoryname=request.getParameter("categoryname");
-System.out.println(categoryname);
-ProductDAOImpl productDao=new ProductDAOImpl();
-ResultSet rs=productDao.showCategoryList(categoryname);
-%>
+
 <table>
 <tr>
 <th>Picture</th>
@@ -45,47 +41,25 @@ ResultSet rs=productDao.showCategoryList(categoryname);
 <th style=color:black>Flower Rating</th>
 <th style=color:black>Buy Product</th>
 </tr>
-<%while(rs.next()){%>
-<tr>
-<td><img alt="#alter" src="<%=rs.getString(8)%>" width="200" height="200"></td>
-<td style=color:black><%= rs.getString(2) %></td>
-<td style=color:black><%= rs.getString(3) %></td>
-<td style=color:black><%= rs.getString(4) %></td>
-<td style=color:black><%= rs.getDouble(5) %></td>
-<td style=color:black><%= rs.getString(6) %></td>
-<td style=color:black><%= rs.getInt(7) %></td>
-<td><button><a href="Order.jsp?flowerId=<%=rs.getInt(1)%>&flowerName=<%=rs.getString(2)%>">Buy</a></button></td>
-</tr>
+<c:forEach var="view" items="${showCategorylist}">
 
-<%} %>
+<tr>
+<td><img alt="#alter" src="${view.picture}" width="200" height="200"></td>
+<td style=color:black>${view.flowerName} </td>
+<td style=color:black>${view.flowerDescription}</td>
+<td style=color:black>${view.color}</td>
+<td style=color:black>${view.retailPrice}</td>
+<td style=color:black>${view.catName}</td>
+<td style=color:black>${view.rating}</td>
+<td><button><a href="order.jsp?flowerId${view.flowerId}&flowerName=${view.flowerName">Buy</a></button></td>
+</tr>
+</c:forEach>
+
 
 
 </table>
 
-
-
-
-
-
-
-
-
-
-
-
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>

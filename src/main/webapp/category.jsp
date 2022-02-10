@@ -63,8 +63,9 @@ margin-top: 100px;
 <th><h3>Category Name</h3></th>
 <th><h3>Buy Product</h3></th>
 
-
+</tr>
 <c:forEach var="show" items="${showCategory}">
+
 <tr>
 
 
@@ -74,8 +75,8 @@ margin-top: 100px;
 
 </td>
 </tr>
-<c:forEach>
 
+</c:forEach>
 </table>
 
 

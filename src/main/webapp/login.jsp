@@ -73,7 +73,7 @@ a {
 </head>
 <body>
 
-<form action="LogInServlet" method="post" >
+<form action="LoginServlet" method="post" >
 
 
 <div class="container">

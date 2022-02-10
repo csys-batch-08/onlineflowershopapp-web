@@ -46,34 +46,9 @@ background-size:cover;
 </div>
 
 
-<%int flowerId=Integer.parseInt(request.getParameter("flowerId")); 
+
+
 	
-	session.setAttribute("flower_id",flowerId);
-	
-	String flowerName=request.getParameter("flowerName");
-	System.out.println("Order Flower Name: "+flowerName);
-	session.setAttribute("flowername", flowerName);
-	
-
-
-
-
-String name=session.getAttribute("username").toString();
-
-
-<center>
-<fieldset id="box">
-<form action="OrderServlet" method="post">
-<%while(rs.next()){%>
-			
-			
-			
-<h3><%= rs.getString(2) %></h3>
-			
-<h1><%double price=rs.getDouble(5);%></h1>
-			
-<h3>Price :<%= price%></h3><br>	
-<%session.setAttribute("retailPrice", price); %>		
 Quantity:<input type="number" name="quantity" pattern=[0-9]{2} min=0 required><br><br>
 				
 				
