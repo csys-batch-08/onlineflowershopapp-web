@@ -24,7 +24,7 @@ public class ShowRating extends HttpServlet {
 	
 		try {
 		ProductDAOImpl product=new ProductDAOImpl();
-		List<Product> showrating=product.ShowRating();
+		List<Product> showrating=product.showRating();
 		
 		request.setAttribute("ShowRatings", showrating);
 		

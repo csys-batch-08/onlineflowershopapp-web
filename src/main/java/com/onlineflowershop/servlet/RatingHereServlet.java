@@ -53,7 +53,7 @@ public class RatingHereServlet extends HttpServlet {
 			ratingDao.updateRating(rating, flowerId);
 			
 			ProductDAOImpl product=new ProductDAOImpl();
-			List<Product> showrating=product.ShowRating();
+			List<Product> showrating=product.showRating();
 			
 			request.setAttribute("ShowRatings", showrating);
 			

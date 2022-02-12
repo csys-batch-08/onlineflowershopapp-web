@@ -17,7 +17,7 @@ background-size:cover;
 <title>Order Success</title>
 </head>
 <body>
-
+<form>
 <h3><i>your Rating was Added Successfully!!</i></h3>
 
 
@@ -30,7 +30,6 @@ background-size:cover;
 <th><h3>Ratings</h3></th>
 </tr>
 <tr>
-
 <c:forEach var="show" items="${ShowRatings}">
 <tbody>
 <tr>
