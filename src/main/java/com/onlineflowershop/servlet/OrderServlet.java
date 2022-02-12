@@ -1,8 +1,9 @@
 package com.onlineflowershop.servlet;
 
 import java.io.IOException;
-import java.util.Date;
+import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,54 +11,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.onlineflowershop.dao.impl.CartDAOImpl;
-import com.onlineflowershop.dao.impl.UserDAOImpl;
-import com.onlineflowershop.dao.impl.WalletDAOImpl;
-import com.onlineflowershop.model.Cart;
-
 /**
  * Servlet implementation class OrderServlet
  */
 @WebServlet("/OrderServlet")
 public class OrderServlet extends HttpServlet {
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		int quantity = Integer.parseInt(request.getParameter("quantity"));
-		String name = (String) session.getAttribute("User");
-		UserDAOImpl userDao = new UserDAOImpl();
-
-		double retailPrice = Double.parseDouble(session.getAttribute("retailPrice").toString());
-
-		double totalPrice = (retailPrice * quantity);
-
-		WalletDAOImpl walletDao = new WalletDAOImpl();
-		int userId = Integer.parseInt(session.getAttribute("userId").toString());
-
-		int Wallet = walletDao.walletbal(userId);
-
-		double wallbal = Wallet - totalPrice;
-
-		session.setAttribute("wallbal", wallbal);
-
-		session.setAttribute("totalPrice", totalPrice);
-
-		Date order = (Date) session.getAttribute("orderDate");
-
-		walletDao.updatewallet(wallbal, userId);
-
-		int flowerId = Integer.parseInt(session.getAttribute("flower_id").toString());
-		session.setAttribute("flower_id", flowerId);
-
-//		Cart cart = new Cart(0,flowerId,null,userId,name,null,quantity, totalPrice,);
-//
-//		CartDAOImpl cartDao = new CartDAOImpl();
-//		cartDao.insertCart(cart);
-//		response.sendRedirect("orderSuccess.jsp");
-
+	private static final long serialVersionUID = 1L;
+       
+    @Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session= request.getSession();
+		
+		 double price=Double.parseDouble (request.getParameter("retailPrice"));
+		 System.out.println(price);
+		 session.setAttribute("Price", price);
+		 String flowerName=request.getParameter("flowerName");
+		 session.setAttribute("FlowerName", flowerName);
+		 String flowerId=request.getParameter("flowerId");
+		 session.setAttribute("FlowerId", flowerId);
+		 System.out.println(flowerId);
+		
+		
+		response.sendRedirect("order.jsp");
+		
 	}
 
 }

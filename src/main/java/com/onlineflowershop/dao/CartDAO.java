@@ -7,19 +7,18 @@ import com.onlineflowershop.model.Cart;
 
 public interface CartDAO {
 
-	public void insertCart(Cart cart);
+	public void insertCart(Cart cart) throws SQLException;
 
-	public void updateCart(String updateCart);
+	public void updateCart(String updateCart) throws SQLException;
 
-	public void deleteCart(String delete);
+	
 
-	public int findCartId(int cart);
+	public int findCartId(int cart) throws SQLException;
 
-	public int walletbal(int id);
-
-	public int updatewallet(int amount, int userid);
-
+	
 	public List<Cart> showUserCart(int userId) throws SQLException;
 
-	public List<Cart> showCart();
+	public List<Cart> showCart() throws SQLException;
+
+	void deleteCart(int userId) throws SQLException;
 }

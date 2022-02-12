@@ -85,9 +85,9 @@ background-size:cover;
 <div class="topnav" >
   
   
-  <a href="Category.jsp">Category</a>
-  <a href="MyCart.jsp">My Order</a>
-  <a href="Home.jsp">Back To Home </a>
+  <a href="category.jsp">Category</a>
+  <a href="myCart.jsp">My Order</a>
+  <a href="home.jsp">Back To Home </a>
  
    
   
@@ -116,7 +116,7 @@ background-size:cover;
 <td>${view.retailPrice}</td>
 <td>${view.catName}</td>
 <td>${view.rating}</td>
-<td><button class="button button1"><a href="order?flowerId=${view.flowerId}&flowerName=${view.flowerName}&retailPrice=${view.retailPrice}"style="text-decoration:none;">Buy</a></button></td>
+<td><button class="button button1"><a href="OrderServlet?flowerId=${view.flowerId}&flowerName=${view.flowerName}&retailPrice=${view.retailPrice}"style="text-decoration:none;">Buy</a></button></td>
 </tr>
 </c:forEach>
 

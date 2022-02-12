@@ -23,7 +23,7 @@ background-size:cover;
 
 <center>
 
-<form action="RatingServlet" method="post">
+<form action="RatingServlet" >
 
 <h3>Please Add Your Rating</h3>
 

@@ -1,6 +1,7 @@
 package com.onlineflowershop.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +33,10 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("hi"+emailId);
 
 		UserDAOImpl userDao = new UserDAOImpl();
-		User currentUser = userDao.validateUser(emailId, password);
+		User currentUser;
+		try {
+			currentUser = userDao.validateUser(emailId, password);
+		
 		if (currentUser != null) {
 			String role = currentUser.getRole();
 
@@ -66,16 +70,10 @@ public class LoginServlet extends HttpServlet {
 				response.sendRedirect("ShowProductServlet");
 
 			}
-		} else {
-			try {
-
-				throw new UserException();
-
-			} catch (UserException e) {
-				session.setAttribute("Invalid", e.getMessage());
-				response.sendRedirect("login.jsp");
-			}
-		}
+		}} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
 
 	}
 

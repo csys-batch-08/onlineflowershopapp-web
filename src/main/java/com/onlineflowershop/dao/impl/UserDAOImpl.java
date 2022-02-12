@@ -15,13 +15,14 @@ import com.onlineflowershop.util.ConnectionUtil;
 public class UserDAOImpl implements UserDAO {
 
 	@Override
-	public void insertUser(User user) {
+	public void insertUser(User user) throws SQLException {
 		String insertQuery = "insert into User_Details(name,email_id,Password,address,mobile_number) values(?,?,?,?,?)";
 
-		Connection con = ConnectionUtil.getDbConnection();
+		Connection con = null;
 		PreparedStatement pst = null;
 
 		try {
+			con = ConnectionUtil.getDbConnection();
 			pst = con.prepareStatement(insertQuery);
 
 			pst.setString(1, user.getName());
@@ -30,11 +31,18 @@ public class UserDAOImpl implements UserDAO {
 			pst.setString(4, user.getAddress());
 			pst.setLong(5, user.getMobileNumber());
 			pst.executeUpdate();
-			System.err.println("Value inserted Success");
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Value not inserted in the table");
+			
+			e.getMessage();
+			
+		}finally {
+			if(pst!=null) {
+				pst.close();
+			}
+			if(con !=null) {
+				con.close();
+			}
 		}
 
 	}
@@ -42,17 +50,21 @@ public class UserDAOImpl implements UserDAO {
 //validate user method	
 
 	@Override
-	public User validateUser(String emailId, String password) {
-		String validateQuery = "select * from user_details where email_id='" + emailId + "'and password='" + password
+	public User validateUser(String emailId, String password) throws SQLException {
+		String validateQuery = "select user_id,name,email_id,password,address,mobile_number,role,walllet from user_details where email_id='" + emailId + "'and password='" + password
 				+ "'";
+		
+		Connection con =null;
+		User user=null;
+		PreparedStatement pstmt=null;
 
 		try {
 
-			Connection con = ConnectionUtil.getDbConnection();
-			PreparedStatement st = con.prepareStatement(validateQuery);
-			ResultSet rs = st.executeQuery();
+		    con= ConnectionUtil.getDbConnection();
+			pstmt = con.prepareStatement(validateQuery);
+			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
-				User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+				 user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getLong(6), rs.getString(7), rs.getDouble(8));
 
 				return user;
@@ -60,9 +72,16 @@ public class UserDAOImpl implements UserDAO {
 		} catch (SQLException e) {
 
 			e.getMessage();
-			System.err.println("Statement error");
+			
+		}finally {
+			if(pstmt !=null) {
+				pstmt.close();
+			}
+			if(con !=null) {
+				con.close();
+			}
 		}
-		return null;
+		return user;
 	}
 
 	// show all user method
@@ -91,73 +110,97 @@ public class UserDAOImpl implements UserDAO {
 
 			}
 		} catch (SQLException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			
+			e.getMessage();
 		}
 		return userlist;
 	}
 
 	// update user
 	@Override
-	public void update(String update) {
+	public void update(String update) throws SQLException {
 		String updateQuery = "update user_details set password=?  where email_id=?";
 
-		Connection con = ConnectionUtil.getDbConnection();
+		Connection con = null;
+		PreparedStatement pstmt=null;
 
 		try {
-			PreparedStatement pstmt = con.prepareStatement(updateQuery);
-			pstmt.setString(1, update.split(",")[0]);
-			pstmt.setString(2, update.split(",")[1]);
-			int i = pstmt.executeUpdate();
-			System.out.println(i + "row updated");
-			pstmt.close();
-			con.close();
+			con = ConnectionUtil.getDbConnection();
+
+			pstmt = con.prepareStatement(updateQuery);
+			pstmt.setString(1, update);
+			pstmt.setString(2, update);
+		    pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			e.getMessage();
+		}finally {
+			if(pstmt !=null) {
+				pstmt.close();
+			}
+			if(con !=null) {
+			  con.close();	
+			}
 		}
 	}
 
 	// delete method
 
 	@Override
-	public void deletedetails(String delete) {
+	public void deletedetails(String delete) throws SQLException {
 		String deleteQuery = "delete from user_details where email_id=?";
 
-		Connection con = ConnectionUtil.getDbConnection();
+		Connection con =null;
+		PreparedStatement pstmt =null;
 		try {
-			PreparedStatement pstmt = con.prepareStatement(deleteQuery);
+			con = ConnectionUtil.getDbConnection();
+		    pstmt = con.prepareStatement(deleteQuery);
 			pstmt.setString(1, delete);
-			int i = pstmt.executeUpdate();
-			System.out.println(i + "row deleted");
+		    pstmt.executeUpdate();
+			
 			pstmt.close();
 			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			e.getMessage();
+		}finally {
+			if(pstmt !=null) {
+				pstmt.close();
+			}
+			if(con !=null) {
+				con.close();
+			}
 		}
 	}
 
 	// find user id method
 
 	@Override
-	public int findUserId(String Name) {
+	public int findUserId(String Name) throws SQLException {
 
 		String findUserID = "select user_id from user_details where name='" + Name + "'";
 		Connection con = ConnectionUtil.getDbConnection();
-		Statement stmt;
+		PreparedStatement pstmt=null;
 
 		int userId = 0;
 		try {
-			stmt = con.createStatement();
+			pstmt = con.prepareStatement(findUserID);
 
-			ResultSet rs = stmt.executeQuery(findUserID);
+			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				userId = rs.getInt(1);
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			e.getMessage();
+		}finally {
+			if(pstmt !=null) {
+				pstmt.close();
+			}
+			if(con !=null) {
+				con.close();
+			}
 		}
 		return userId;
 
@@ -169,14 +212,14 @@ public class UserDAOImpl implements UserDAO {
 		ResultSet rs = null;
 		try {
 			Connection con = ConnectionUtil.getDbConnection();
-			System.out.println(id);
+			
 			String query = "select user_wallet from user_details where user_id = ?";
 			PreparedStatement statement = con.prepareStatement(query);
 			statement.setInt(1, id);
 			rs = statement.executeQuery();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return rs;

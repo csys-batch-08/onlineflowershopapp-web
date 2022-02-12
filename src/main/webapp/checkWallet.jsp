@@ -50,17 +50,17 @@ background-size:cover;
 <body>
 
 <div class="topnav" >
-  <a href="Home.jsp">Back To Home</a>
+  <a href="home.jsp">Back To Home</a>
 </div>
 
 
 
-<fieldset id="box"><center>
+<fieldset id="box"><center><legend>Recharge Wallet</legend>
 <h2>Your Wallet Amount is low Please Recharge </h2>
-<form action="CheckWallet">
+<form action="checkWallet">
 <button type="submit" id="button">Pay</button>
 </form><br>
-<form action="Home.jsp">
+<form action="home.jsp">
 <button type="submit" id="button">Pay Later</button>
 </form></center>
 </fieldset>

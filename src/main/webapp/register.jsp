@@ -65,7 +65,7 @@
 <body>
 
 
-<form action="Register" method="post"> 
+<form action="RegisterServlet" method="post"> 
 
 <div class="container">
 

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="com.onlineflowershop.dao.impl.*" import="java.sql.*"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <style>
 body{
@@ -39,17 +40,19 @@ background-size:cover;
 <body>
 <div class="topnav" >
 
-   <a href="AboutUs".jsp">About Us</a>
-   <a href="Category.jsp">Category </a>
+   <a href="aboutUs.jsp">About Us</a>
+   <a href="category.jsp">Category </a>
     
-   <a href="Home.jsp">Back To Home</a>
+   <a href="home.jsp">Back To Home</a>
 </div>
 
 
+<fieldset id="box"><legend >Order Here</legend>
+<form action="OrderSucessServlet">
 
-
-	
-Quantity:<input type="number" name="quantity" pattern=[0-9]{2} min=0 required><br><br>
+<h3>${sessionScope.Price}</h3>
+<h3>${sessionScope.FlowerName}</h3>	
+<label for="quantity" id="1">Quantity:<input type="number" name="quantity" pattern=[0-9]{2} min=0 required></label><br><br>
 				
 				
 								

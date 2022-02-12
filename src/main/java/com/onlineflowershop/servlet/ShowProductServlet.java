@@ -1,6 +1,7 @@
 package com.onlineflowershop.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -24,13 +25,15 @@ public class ShowProductServlet extends HttpServlet {
 
 			throws ServletException, IOException {
 
-		System.out.println("hiservlet");
+		try {
 		ProductDAOImpl productDao = new ProductDAOImpl();
 		List<Product> showProduct = productDao.viewProduct();
 		request.setAttribute("viewProduct", showProduct);
 		RequestDispatcher rd = request.getRequestDispatcher("showProduct.jsp");
 		rd.forward(request, response);
-
+		}catch(SQLException e){
+			e.getMessage();
+		}
 	}
 
 }

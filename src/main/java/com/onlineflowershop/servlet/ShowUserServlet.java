@@ -22,7 +22,7 @@ public class ShowUserServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		
 		UserDAOImpl userDao= new UserDAOImpl();
 		List<User> viewAllUser=userDao.showUser();

@@ -1,6 +1,7 @@
 package com.onlineflowershop.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,37 +21,17 @@ import com.onlineflowershop.model.Product;
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-
-	public HomeServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		ProductDAOImpl proDao = new ProductDAOImpl();
 
-		List<Product> productsList = (List<Product>) proDao.viewProduct();
+		List<Product> productsList;
+		try {
+			productsList = (List<Product>) proDao.viewProduct();
+		
 		for (int i = 0; i < productsList.size(); i++) {
 			System.out.println(productsList.get(i));
 
@@ -60,7 +41,9 @@ public class HomeServlet extends HttpServlet {
 		session.setAttribute("productsList", productsList);
 		response.sendRedirect("home.jsp");
 
-		doGet(request, response);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

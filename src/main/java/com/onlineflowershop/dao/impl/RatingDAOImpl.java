@@ -12,45 +12,60 @@ import com.onlineflowershop.util.ConnectionUtil;
 public class RatingDAOImpl implements RatingDAO {
 	
 	
-	public  void updateRating(int rating,int flowerId){
+	public  void updateRating(int rating,int flowerId) throws SQLException{
 		String updateQuery="update inventory set rating=? where flower_id=?";
 	
-		Connection con=ConnectionUtil.getDbConnection();
-		//System.out.println("Connection successfully");		
+		Connection con=null;
 		PreparedStatement pstmt=null;
 		try {
+			con=ConnectionUtil.getDbConnection();
 			pstmt = con.prepareStatement(updateQuery);
 			pstmt.setInt(1,rating);
 			pstmt.setInt(2, flowerId);			
 			pstmt.executeUpdate();
-			System.out.println("Rating Updated successfully");
-			pstmt.close();
-			con.close();
+			
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			e.getMessage();
+		}finally {
+			if(con !=null) {
+				con.close();
+			}
+			if(pstmt !=null) {
+				pstmt.close();
+			}
 		}
 		
+		
 	}
-	public  int findRating(String flowerName)
+	public  int findRating(String flowerName) throws SQLException
 	{
 		String findRating="select rating from inventory where flower_name='"+flowerName+"'";
-		Connection con=ConnectionUtil.getDbConnection();
-		Statement stmt;
+		Connection con=null;
+		PreparedStatement stmt =null ;
 		int rating=0;
 		try {
-			stmt = con.createStatement();
-			System.out.println(flowerName);
-			ResultSet rs=stmt.executeQuery(findRating);
+			con=ConnectionUtil.getDbConnection();
+			stmt = con.prepareStatement(findRating);
+			
+			ResultSet rs=stmt.executeQuery();
 			if(rs.next())
 			{
 			rating=rs.getInt(1);
-			System.out.println(rating);
+			
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			e.getMessage();
+		}finally {
+			if(con !=null) {
+				con.close();
+			}
+			if(stmt !=null) {
+				stmt.close();
+			}
 		}
 		return rating;
 		

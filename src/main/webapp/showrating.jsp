@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="java.sql.ResultSet" import="com.onlineflowershop.dao.impl.*"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,29 +21,28 @@ background-size:cover;
 <h3><i>your Rating was Added Successfully!!</i></h3>
 
 
-<%
-ProductDAOImpl product=new ProductDAOImpl();
-ResultSet rs=product.ShowRating();
-%>
+
 
 <h2><i>Highly Rated Flower</i></h2>
 <table align="left" border="5">
-
+<tr>
 <th><h3>Flower Name</h3></th>
 <th><h3>Ratings</h3></th>
-
-
-<% while(rs.next()){%>
-<tr>
-<td><%= rs.getString(1) %></td>
-<td><%= rs.getInt(2) %></td>
 </tr>
-<%} %>
+<tr>
 
+<c:forEach var="show" items="${ShowRatings}">
+<tbody>
+<tr>
+<td>${show.flowerName}</td>
+<td>${show.rating}</td>
+</tr>
+</tbody>
+</c:forEach>
 </table>
 
 
 </form><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<a href="Home.jsp">Back To Home Page</a>
+<a href="home.jsp">Back To Home Page</a>
 </body>
 </html>
