@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,18 +16,16 @@ public class CartDAOImpl implements CartDAO {
 
 	@Override
 	public void insertCart(Cart cart) throws SQLException {
-		ProductDAOImpl proDao = new ProductDAOImpl();
-		UserDAOImpl userDao = new UserDAOImpl();
-
+		
 		String insert = "insert into cart_items(flower_id,user_id,order_quantity,total_price) values(?,?,?,?)";
 
-		ConnectionUtil connectionutil = new ConnectionUtil();
-		Connection connection =null;
+		ConnectionUtil ConnectionUtil = new ConnectionUtil();
+		Connection con =null;
 		PreparedStatement pst = null;
 
 		try {
-			connection = connectionutil.getDbConnection();
-			pst = connection.prepareStatement(insert);
+			con = ConnectionUtil.getDbConnection();
+			pst = con.prepareStatement(insert);
 			pst.setInt(1, cart.getProductId());
 			pst.setInt(2, cart.getUserId());
 			pst.setInt(3, cart.getOrderQuantity());
@@ -39,8 +37,8 @@ public class CartDAOImpl implements CartDAO {
 			e.getMessage();
 			
 		}finally {
-			if(connection !=null) {
-				connection.close();
+			if(con !=null) {
+				con.close();
 			}
 			if(pst !=null) {
 				pst.close();
@@ -53,7 +51,7 @@ public class CartDAOImpl implements CartDAO {
 
 	@Override
 	public List<Cart> showCart() throws SQLException {
-		List<Cart> cartlist = new ArrayList<Cart>();
+		List<Cart> cartlist = new ArrayList<>();
 
 		String listquery = "select flower_id,count(order_quantity),sum(total_price),user_id,trunc(order_date) from cart_items group by flower_id,user_id ,trunc(order_date)order by trunc(order_date) desc";
 		Connection con = null;
@@ -148,14 +146,14 @@ public class CartDAOImpl implements CartDAO {
 
 	@Override
 	public int findCartId(int cart) throws SQLException {
-		String Cart = "select cart_id from product_details where user_id=?";
+		String findcart = "select cart_id from product_details where user_id=?";
 
 		Connection con = ConnectionUtil.getDbConnection();
 		PreparedStatement pst =null;
 		int cartId = 0;
 		try {
 			con = ConnectionUtil.getDbConnection();
-			pst = con.prepareStatement(Cart);
+			pst = con.prepareStatement(findcart);
 			pst.setInt(1, cartId);
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
@@ -185,7 +183,7 @@ public class CartDAOImpl implements CartDAO {
 	@Override
 	public List<Cart> showUserCart(int userId) throws SQLException {
 
-		List<Cart> orderlist = new ArrayList<Cart>();
+		List<Cart> orderlist = new ArrayList<>();
 		String userCart = "select cart_id,email_id,flower_name,order_quantity,total_price,order_date from cart_items inner join user_details using (user_id)inner join inventory using(flower_id) where user_id=?";
 
 		Connection con = null;
