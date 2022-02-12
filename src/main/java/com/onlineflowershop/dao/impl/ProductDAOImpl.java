@@ -16,22 +16,19 @@ import com.onlineflowershop.util.ConnectionUtil;
 
 public class ProductDAOImpl implements ProductDAO {
 
-	ConnectionUtil conutil = new ConnectionUtil();
-	Connection con = conutil.getDbConnection();
-
 	// show product method
 
 	@Override
 	public List<Product> viewProduct() throws SQLException {
-		List<Product> inventorylist = new ArrayList<Product>();
+		List<Product> inventorylist = new ArrayList<>();
 
 		String showQurey = "select flower_id,flower_name,flower_description,color,retail_price,category_name,rating,picture from inventory";
-		Connection connection = ConnectionUtil.getDbConnection();
+		Connection con = null;
 		PreparedStatement stmt = null;
 
 		try {
-			connection = ConnectionUtil.getDbConnection();
-			stmt = connection.prepareStatement(showQurey);
+			con = ConnectionUtil.getDbConnection();
+			stmt = con.prepareStatement(showQurey);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 
@@ -53,8 +50,8 @@ public class ProductDAOImpl implements ProductDAO {
 
 			e.getMessage();
 		}finally {
-			if(connection !=null) {
-				connection.close();
+			if(con !=null) {
+				con.close();
 			}
 			if(stmt !=null) {
 				stmt.close();
@@ -71,12 +68,13 @@ public class ProductDAOImpl implements ProductDAO {
 	public void insertProduct(Product product) throws SQLException {
 		String insertQuery = "insert into inventory(flower_name,flower_description,color,retail_price,category_name) values(?,?,?,?,?)";
 
-		ConnectionUtil connectionUtil = new ConnectionUtil();
-		Connection connection = connectionUtil.getDbConnection();
+		
+		Connection con = null;
 		PreparedStatement pst = null;
 
 		try {
-			pst = connection.prepareStatement(insertQuery);
+			con = ConnectionUtil.getDbConnection();
+			pst = con.prepareStatement(insertQuery);
 			pst.setString(1, product.getFlowerName());
 			pst.setString(2, product.getFlowerDescription());
 			pst.setString(3, product.getColor());
@@ -92,8 +90,8 @@ public class ProductDAOImpl implements ProductDAO {
 			if(pst !=null) {
 				pst.close();
 			}
-			if(connection !=null) {
-				connection.close();
+			if(con !=null) {
+				con.close();
 			}
 		}
 

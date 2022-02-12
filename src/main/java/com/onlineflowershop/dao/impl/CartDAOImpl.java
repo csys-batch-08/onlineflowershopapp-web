@@ -17,15 +17,15 @@ public class CartDAOImpl implements CartDAO {
 	@Override
 	public void insertCart(Cart cart) throws SQLException {
 		
-		String insert = "insert into cart_items(flower_id,user_id,order_quantity,total_price) values(?,?,?,?)";
+		String insertquery = "insert into cart_items(flower_id,user_id,order_quantity,total_price) values(?,?,?,?)";
 
-		ConnectionUtil ConnectionUtil = new ConnectionUtil();
+		
 		Connection con =null;
 		PreparedStatement pst = null;
 
 		try {
 			con = ConnectionUtil.getDbConnection();
-			pst = con.prepareStatement(insert);
+			pst = con.prepareStatement(insertquery);
 			pst.setInt(1, cart.getProductId());
 			pst.setInt(2, cart.getUserId());
 			pst.setInt(3, cart.getOrderQuantity());
