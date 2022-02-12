@@ -101,17 +101,16 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public void updateProduct(String flowerName, int flowerId) throws SQLException {
 		String updateQuery = "update inventory set flower_name =?  where flower_id=?";
-		Connection connection = null;
+		Connection con = null;
 		PreparedStatement pstmt =null;
 		try {
-			connection = ConnectionUtil.getDbConnection();
-			pstmt = connection.prepareStatement(updateQuery);
+			con = ConnectionUtil.getDbConnection();
+			pstmt = con.prepareStatement(updateQuery);
 			pstmt.setString(1, flowerName);
 			pstmt.setInt(2, flowerId);
-			 pstmt.executeUpdate();
+	pstmt.executeUpdate();
 			
-			pstmt.close();
-			con.close();
+			
 		} catch (SQLException e) {
 			
 			e.getMessage();
@@ -119,8 +118,8 @@ public class ProductDAOImpl implements ProductDAO {
 			if(pstmt !=null) {
 				pstmt.close();
 			}
-			if(connection !=null) {
-				connection.close();
+			if(con !=null) {
+				con.close();
 			}
 		}
 
@@ -132,11 +131,11 @@ public class ProductDAOImpl implements ProductDAO {
 
 		String updateQuery = "update inventory set Ratings=? where flower_name=?";
 
-		Connection connection = null;
+		Connection con = null;
 		PreparedStatement pstmt =null;
 		try {
-			connection = ConnectionUtil.getDbConnection();
-			pstmt = connection.prepareStatement(updateQuery);
+			con = ConnectionUtil.getDbConnection();
+			pstmt = con.prepareStatement(updateQuery);
 			pstmt.executeUpdate();
 			
 
@@ -147,8 +146,8 @@ public class ProductDAOImpl implements ProductDAO {
 			if(pstmt !=null) {
 				pstmt.close();
 			}
-			if(connection !=null) {
-				connection.close();
+			if(con !=null) {
+				con.close();
 			}
 		}
 
@@ -189,15 +188,17 @@ public class ProductDAOImpl implements ProductDAO {
 	public int findProductId1(String productName) throws SQLException {
 		String selectquery = "select flower_id from inventory where flower_name='" + productName + "'";
 
-		Connection connection = ConnectionUtil.getDbConnection();
+		Connection con = null;
 		PreparedStatement stmt=null;
 		int proId = 0;
+		ResultSet rs = null;
 
 		try {
+			con = ConnectionUtil.getDbConnection();
 			stmt = con.prepareStatement(selectquery);
 
-			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) {
+			rs=stmt.executeQuery();
+			if(rs.next()) {
 				proId = rs.getInt(1);
 			}
 
@@ -208,8 +209,8 @@ public class ProductDAOImpl implements ProductDAO {
 			if(stmt !=null) {
 				stmt.close();
 			}
-			if(connection !=null) {
-				connection.close();
+			if(con !=null) {
+				con.close();
 			}
 		}
 
@@ -219,16 +220,17 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public ResultSet findPrice(int productId) {
-		String query = "select flower_id,flower_name,flower_description,color,retail_price,category_name,rating from inventory where flower_id='" + productId + "'";
+		String pricequery = "select flower_id,flower_name,flower_description,color,retail_price,category_name,rating from inventory where flower_id='" + productId + "'";
 
-		Connection connetion = ConnectionUtil.getDbConnection();
-		Statement stmt;
+		Connection con =null;
+		PreparedStatement stmt =null;
 		ResultSet rs = null;
 
 		try {
-			stmt = con.createStatement();
+			con = ConnectionUtil.getDbConnection();
+			stmt = con.prepareStatement(pricequery);
 
-			rs = stmt.executeQuery(query);
+			rs = stmt.executeQuery();
 
 			return rs;
 
@@ -244,14 +246,14 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public ResultSet findCategory(String categoryName) throws SQLException {
 
-		Product category = null;
+		
 		String showQuery = "select flower_id,flowr_name,flower_description,color,retail_price,category_name,rating from inventory where category_name='" + categoryName + "'";
-		Connection connection = null;
+		Connection con = null;
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
 		try {
-			 connection = ConnectionUtil.getDbConnection();
-			 stmt = connection.prepareStatement(showQuery);
+			 con = ConnectionUtil.getDbConnection();
+			 stmt = con.prepareStatement(showQuery);
 			rs = stmt.executeQuery();
 
 		} catch (SQLException e) {
@@ -261,8 +263,8 @@ public class ProductDAOImpl implements ProductDAO {
 			if(stmt!=null) {
 				stmt.close();
 			}
-			if(connection !=null)
-				connection.close();
+			if(con !=null)
+				con.close();
 		}
 
 		return rs;
@@ -270,16 +272,16 @@ public class ProductDAOImpl implements ProductDAO {
 
 	// show rating
 
-	public List<Product> ShowRating() throws SQLException {
-		List<Product> rating=new ArrayList<Product>();
+	public List<Product> showRating() throws SQLException {
+		List<Product> rating=new ArrayList<>();
 
 		String showquery = "select flower_name,rating from inventory order by rating desc";
 
-		Connection connection =null;
+		Connection con =null;
 		ResultSet rs = null;
 		PreparedStatement stmt =null;
 		try {
-			 connection = ConnectionUtil.getDbConnection();
+			 con = ConnectionUtil.getDbConnection();
 			stmt = con.prepareStatement(showquery);
 			rs = stmt.executeQuery();
 			
@@ -303,8 +305,8 @@ public class ProductDAOImpl implements ProductDAO {
 			if(stmt!=null) {
 				stmt.close();
 			}
-			if(connection !=null)
-				connection.close();
+			if(con !=null)
+				con.close();
 		}
 
 		return rating;
@@ -313,7 +315,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	// Category List
 	public List<Product> showCategory() throws SQLException {
-		List<Product> category = new ArrayList<Product>();
+		List<Product> category = new ArrayList<>();
 
 		String showcategory = "select distinct category_name from inventory";
 
@@ -352,17 +354,17 @@ public class ProductDAOImpl implements ProductDAO {
 //	
 
 	public List<Product> showCategoryList(String categoryname) throws SQLException {
-		List<Product> viewCategory = new ArrayList<Product>();
+		List<Product> viewCategory = new ArrayList<>();
 
 		String categorylist = "select flower_id,flower_name,flower_description,color,retail_price,category_name,rating,picture from inventory where category_name=?";
 
-		Connection connection = null;
+		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		ResultSet rs = null;
 		try {
-			connection = ConnectionUtil.getDbConnection();
-			pstmt = connection.prepareStatement(categorylist);
+			con = ConnectionUtil.getDbConnection();
+			pstmt = con.prepareStatement(categorylist);
 			pstmt.setString(1, categoryname);
 			rs = pstmt.executeQuery();
 
@@ -387,8 +389,8 @@ public class ProductDAOImpl implements ProductDAO {
 			if (pstmt != null) {
 				pstmt.close();
 			}
-			if (connection != null) {
-				connection.close();
+			if (con != null) {
+				con.close();
 			}
 		}
 

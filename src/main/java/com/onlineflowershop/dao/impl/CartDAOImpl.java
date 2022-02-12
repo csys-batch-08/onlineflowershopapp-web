@@ -19,7 +19,7 @@ public class CartDAOImpl implements CartDAO {
 		
 		String insertquery = "insert into cart_items(flower_id,user_id,order_quantity,total_price) values(?,?,?,?)";
 
-		
+		 
 		Connection con =null;
 		PreparedStatement pst = null;
 
@@ -99,7 +99,7 @@ public class CartDAOImpl implements CartDAO {
 			pstmt = con.prepareStatement(updateQuery);
 			pstmt.setInt(1, Integer.parseInt(updateCart.split(",")[0]));
 			pstmt.setInt(2, Integer.parseInt(updateCart.split(",")[1]));
-			int i = pstmt.executeUpdate();
+		    pstmt.executeUpdate();
 			
 			
 		} catch (SQLException e) {

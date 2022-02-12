@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,12 +57,13 @@ public class UserDAOImpl implements UserDAO {
 		Connection con =null;
 		User user=null;
 		PreparedStatement pstmt=null;
+		ResultSet rs = null;
 
 		try {
 
 		    con= ConnectionUtil.getDbConnection();
 			pstmt = con.prepareStatement(validateQuery);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				 user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getLong(6), rs.getString(7), rs.getDouble(8));
@@ -88,13 +89,16 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public List<User> showUser() {
 
-		List<User> userlist = new ArrayList<User>();
+		List<User> userlist = new ArrayList<>();
 
 		String showQuery = "select user_id,name,email_id,password,address,mobile_number,role,walllet";
-		Connection con = ConnectionUtil.getDbConnection();
+		Connection con = null;
+		PreparedStatement stmt=null;
+		ResultSet rs =null;
 		try {
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(showQuery);
+			con = ConnectionUtil.getDbConnection();
+			stmt = con.prepareStatement(showQuery);
+			rs = stmt.executeQuery();
 			while (rs.next()) {
 				User user = new User();
 				user.setUserId(rs.getInt(1));
@@ -180,12 +184,14 @@ public class UserDAOImpl implements UserDAO {
 		String findUserID = "select user_id from user_details where name='" + Name + "'";
 		Connection con = ConnectionUtil.getDbConnection();
 		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		
 
 		int userId = 0;
 		try {
 			pstmt = con.prepareStatement(findUserID);
 
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				userId = rs.getInt(1);
@@ -220,7 +226,7 @@ public class UserDAOImpl implements UserDAO {
 
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
+			e.getMessage();
 		}
 		return rs;
 	}
@@ -236,11 +242,11 @@ public class UserDAOImpl implements UserDAO {
 			PreparedStatement statement = con.prepareStatement(query);
 			statement.setInt(1, amount);
 			statement.setInt(2, userid);
-			// statement.executeUpdate("commit");
+			
 			res = statement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			e.getMessage();
 
 		}
 

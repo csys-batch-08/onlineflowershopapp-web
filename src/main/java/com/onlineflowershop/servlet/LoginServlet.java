@@ -64,15 +64,15 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("currentUser1", currentUser.getName());
 
 				WalletDAOImpl WalletBal = new WalletDAOImpl();
-				int WalletBallance = WalletBal.walletbal(userId);
+				int walletBallance = WalletBal.walletbal(userId);
 
-				System.out.println("loginservlet");
+				
 				response.sendRedirect("ShowProductServlet");
 
 			}
 		}} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			
+			e1.getMessage();
 		} 
 
 	}

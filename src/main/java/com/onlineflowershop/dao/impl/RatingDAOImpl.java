@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import com.onlineflowershop.dao.RatingDAO;
 import com.onlineflowershop.util.ConnectionUtil;
@@ -45,11 +44,12 @@ public class RatingDAOImpl implements RatingDAO {
 		Connection con=null;
 		PreparedStatement stmt =null ;
 		int rating=0;
+		ResultSet rs=null;
 		try {
 			con=ConnectionUtil.getDbConnection();
 			stmt = con.prepareStatement(findRating);
 			
-			ResultSet rs=stmt.executeQuery();
+		     rs=stmt.executeQuery();
 			if(rs.next())
 			{
 			rating=rs.getInt(1);
