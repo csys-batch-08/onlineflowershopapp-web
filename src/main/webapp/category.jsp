@@ -47,7 +47,7 @@ margin-top: 100px;
 
 
    
-   <a href="myCart.jsp">My Order</a>    
+   <a href="MyCart">My Order</a>    
    <a href="home.jsp">Back To Home</a>
 </div>
 
@@ -64,14 +64,14 @@ margin-top: 100px;
 <th><h3>Buy Product</h3></th>
 
 </tr>
-<c:forEach var="show" items="${showCategory}">
+<c:forEach var="show" items="${ShowCategory}">
 
 <tr>
 
 
-<td>${show.categoryName}</td>
+<td>${show.catName}</td>
 
-<td><button><a href="categoryFilter.jsp?categoryname=${show.categoryName}">Buy</a></button></button></button>
+<td><button><a href="CategoryFilterServlet?categoryname=${show.catName}">Buy</a></button></button></button>
 
 </td>
 </tr>

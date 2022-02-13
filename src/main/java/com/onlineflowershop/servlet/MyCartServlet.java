@@ -18,23 +18,13 @@ import com.onlineflowershop.model.Cart;
 /**
  * Servlet implementation class MyCartServlet
  */
-@WebServlet("/MyCartServlet")
+@WebServlet("/MyCart")
 public class MyCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
@@ -45,10 +35,10 @@ public class MyCartServlet extends HttpServlet {
 		List<Cart> orderlist;
 		try {
 			orderlist = cartDao.showUserCart(userId);
+			
 			request.setAttribute("viewOrder", orderlist);
-
-			String emailId = session.getAttribute("CurrentUser").toString();
-			request.setAttribute("UserName", emailId);
+            String emailId = session.getAttribute("CurrentUser").toString();
+			request.setAttribute("userName", emailId);
 
 			RequestDispatcher rd = request.getRequestDispatcher("myCart.jsp");
 			rd.forward(request, response);

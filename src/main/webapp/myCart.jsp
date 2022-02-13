@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1" import="java.sql.ResultSet"  import="com.onlineflowershop.dao.impl.CartDAOImpl"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>My Order Page</title>
@@ -50,9 +50,9 @@ background-size:cover;
 </head>
 <body>
 <div class="topnav" >
-<a href="Category.jsp">Category</a>
-<a href="Aboutus.jsp">About Us</a>
-<a href="Home.jsp">LogOut</a>
+<a href="CategoryServlet">Category</a>
+<a href="aboutUs.jsp">About Us</a>
+<a href="home.jsp">LogOut</a>
 
 </div>
 
@@ -70,7 +70,7 @@ background-size:cover;
 <c:forEach var="show" items="${viewOrder}">
 
 <tr>
-<td>${show.userName}</td>
+<td>${requestScope['userName']}</td>
 <td>${show.flowerName}</td>
 <td>${show.orderQuantity}</td>
 <td>${show.totalPrice}</td>

@@ -42,10 +42,10 @@ margin-bottom: 350px;
 <div class="topnav" >
 
 
-   <ahref="Login.jsp">Login</a>
-  <a href="Register.jsp">Register</a>
+
+  
     
-   <a href="Home.jsp">Back To Home</a>
+   <a href="home.jsp">Back To Home</a>
 </div>
 
 <h1><i>The Flower Fairies:</i></h3>

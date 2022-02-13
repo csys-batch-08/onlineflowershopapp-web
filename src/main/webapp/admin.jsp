@@ -63,25 +63,25 @@ background-size:cover;
 </form>
 
 
-<fieldset id="box">
-<form action="ShowUser.jsp">
+<fieldset id="box"><legend>Edit Here</legend>
+<form action="ShowUserServlet">
 <button type="submit"id="button"><i>ShowUser</i> </button>
 </form><br>
 
-<form action="SalesHistory.jsp">
+<form action="SalesHistoryServlet">
 <button type="submit"id="button"><i>SalesHistory</i> </button>
 </form><br>
 
 
-<form action="UpdateProduct.jsp">
+<form action="UpdateProductServlet">
 <button type="submit" id="button"><i>UpdateProduct</i></button>
 </form><br>
 
-<form action="AddProduct.jsp" >
+<form action="AddProductServlet" >
 <button type="submit" id="button"><i> AddProduct</i></button>
 </form><br>
 
-<form action="DeleteProduct.jsp">
+<form action="DeleteProductServlet">
 <button type="submit" id="button"><i>DeleteProduct</i></button>
 </form><br>
 

@@ -17,7 +17,7 @@ public class CartDAOImpl implements CartDAO {
 	@Override
 	public void insertCart(Cart cart) throws SQLException {
 		
-		String insertquery = "insert into cart_items(flower_id,user_id,order_quantity,total_price) values(?,?,?,?)";
+		String insertQuery = "insert into cart_items(flower_id,user_id,order_quantity,total_price) values(?,?,?,?)";
 
 		 
 		Connection con =null;
@@ -25,7 +25,8 @@ public class CartDAOImpl implements CartDAO {
 
 		try {
 			con = ConnectionUtil.getDbConnection();
-			pst = con.prepareStatement(insertquery);
+			
+			pst = con.prepareStatement(insertQuery);
 			pst.setInt(1, cart.getProductId());
 			pst.setInt(2, cart.getUserId());
 			pst.setInt(3, cart.getOrderQuantity());
@@ -56,12 +57,13 @@ public class CartDAOImpl implements CartDAO {
 		String listquery = "select flower_id,count(order_quantity),sum(total_price),user_id,trunc(order_date) from cart_items group by flower_id,user_id ,trunc(order_date)order by trunc(order_date) desc";
 		Connection con = null;
 		PreparedStatement pst =null;
+		ResultSet rs =null;
 		
 
 		try {
 			con = ConnectionUtil.getDbConnection();
 		    pst= con.prepareStatement(listquery);
-			ResultSet rs = pst.executeQuery();
+			rs = pst.executeQuery();
 			while (rs.next()) {
 
 				Cart flower = new Cart();
@@ -69,7 +71,7 @@ public class CartDAOImpl implements CartDAO {
 				flower.setOrderQuantity(rs.getInt(2));
 				flower.setTotalPrice(rs.getDouble(3));
 				flower.setUserId(rs.getInt(4));
-				flower.setOrderDate(rs.getDate(5));
+				flower.setOrderDate(rs.getDate(5).toLocalDate());
 
 				cartlist.add(flower);
 
@@ -190,11 +192,11 @@ public class CartDAOImpl implements CartDAO {
 		PreparedStatement pstmt = null;
 
 		ResultSet rs = null;
+		
 		try {
 			con = ConnectionUtil.getDbConnection();
 			pstmt = con.prepareStatement(userCart);
 			pstmt.setInt(1, userId);
-
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 
@@ -204,10 +206,13 @@ public class CartDAOImpl implements CartDAO {
 				cart.setFlowerName(rs.getString(3));
 				cart.setOrderQuantity(rs.getInt(4));
 				cart.setTotalPrice(rs.getDouble(5));
-				cart.setOrderDate(rs.getDate(6));
+				cart.setOrderDate(rs.getDate(6).toLocalDate());
 				orderlist.add(cart);
+				
 
 			}
+			return orderlist;
+			
 		} catch (SQLException e) {
 
 			e.getMessage();
@@ -222,7 +227,7 @@ public class CartDAOImpl implements CartDAO {
 		}
 
 		return orderlist;
-
+	
 	}
 
 	

@@ -14,8 +14,8 @@ public interface ProductDAO {
 	public  void insertRating(int insertRating) throws SQLException;
 	public  void deleteProduct(int flowerId) throws SQLException;
 	public  int findProductId1(String productName) throws SQLException;
-	public  ResultSet findPrice(int productId);
-	public ResultSet findCategory(String categoryName) throws SQLException;
+	public  int findPrice(int productId) throws SQLException;
+	public List<Product> findCategory(String categoryName) throws SQLException;
 
 
 }

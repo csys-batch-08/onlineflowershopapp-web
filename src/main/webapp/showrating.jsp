@@ -27,7 +27,7 @@ background-size:cover;
 <table align="left" border="5">
 <tr>
 <th><h3>Flower Name</h3></th>
-<th><h3>Ratings</h3></th>
+<th><h3>Rating</h3></th>
 </tr>
 <tr>
 <c:forEach var="show" items="${ShowRatings}">

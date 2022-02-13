@@ -167,8 +167,7 @@ public class ProductDAOImpl implements ProductDAO {
 			pstmt.setInt(1, flowerId);
 			pstmt.executeUpdate();
 			
-			pstmt.close();
-			con.close();
+			
 		} catch (SQLException e) {
 
 			e.getMessage();
@@ -219,33 +218,41 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public ResultSet findPrice(int productId) {
-		String pricequery = "select flower_id,flower_name,flower_description,color,retail_price,category_name,rating from inventory where flower_id='" + productId + "'";
+	public int findPrice(int productId) throws SQLException {
+		String pricequery = "select retail_price from inventory where flower_id='" + productId + "'";
 
 		Connection con =null;
 		PreparedStatement stmt =null;
-		ResultSet rs = null;
+		
 
 		try {
 			con = ConnectionUtil.getDbConnection();
 			stmt = con.prepareStatement(pricequery);
+            stmt.setInt(1, productId);
+			
 
-			rs = stmt.executeQuery();
-
-			return rs;
+			
 
 		} catch (SQLException e) {
 
 			e.getMessage();
+		}finally {
+			
+			if(stmt !=null) {
+				stmt.close();
+			}
+			if(con !=null) {
+				con.close();
+			}
 		}
 
-		return rs;
+		return 0;
 
 	}
 
 	@Override
-	public ResultSet findCategory(String categoryName) throws SQLException {
-
+	public List<Product> findCategory(String categoryName) throws SQLException {
+           List<Product> category=new ArrayList<>();
 		
 		String showQuery = "select flower_id,flowr_name,flower_description,color,retail_price,category_name,rating from inventory where category_name='" + categoryName + "'";
 		Connection con = null;
@@ -267,7 +274,7 @@ public class ProductDAOImpl implements ProductDAO {
 				con.close();
 		}
 
-		return rs;
+		return category;
 	}
 
 	// show rating

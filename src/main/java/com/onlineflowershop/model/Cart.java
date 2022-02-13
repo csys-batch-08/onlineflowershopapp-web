@@ -1,5 +1,6 @@
 package com.onlineflowershop.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,15 +14,17 @@ public class Cart {
 	private String emailId;
 	private int orderQuantity;
 	private double totalPrice;
-	private Date orderDate;
-
+	private LocalDate orderDate;
+	
+	
+	
+	
 	public Cart() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
-
 	public Cart(int cartId, int productId, String flowerName, int userId, String userName, String emailId,
-			int orderQuantity, double totalPrice, Date orderDate) {
+			int orderQuantity, double totalPrice, LocalDate orderDate) {
 		super();
 		this.cartId = cartId;
 		this.productId = productId;
@@ -33,85 +36,65 @@ public class Cart {
 		this.totalPrice = totalPrice;
 		this.orderDate = orderDate;
 	}
-
 	public int getCartId() {
 		return cartId;
 	}
-
 	public void setCartId(int cartId) {
 		this.cartId = cartId;
 	}
-
 	public int getProductId() {
 		return productId;
 	}
-
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-
 	public String getFlowerName() {
 		return flowerName;
 	}
-
 	public void setFlowerName(String flowerName) {
 		this.flowerName = flowerName;
 	}
-
 	public int getUserId() {
 		return userId;
 	}
-
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-
 	public String getUserName() {
 		return userName;
 	}
-
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
 	public String getEmailId() {
 		return emailId;
 	}
-
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-
 	public int getOrderQuantity() {
 		return orderQuantity;
 	}
-
 	public void setOrderQuantity(int orderQuantity) {
 		this.orderQuantity = orderQuantity;
 	}
-
 	public double getTotalPrice() {
 		return totalPrice;
 	}
-
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-
-	public Date getOrderDate() {
+	public LocalDate getOrderDate() {
 		return orderDate;
 	}
-
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
+	public void setOrderDate(LocalDate date) {
+		this.orderDate = date;
 	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(cartId, emailId, flowerName, orderDate, orderQuantity, productId, totalPrice, userId,
 				userName);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -128,11 +111,7 @@ public class Cart {
 				&& userId == other.userId && Objects.equals(userName, other.userName);
 	}
 
-	@Override
-	public String toString() {
-		return "Cart [cartId=" + cartId + ", productId=" + productId + ", flowerName=" + flowerName + ", userId="
-				+ userId + ", userName=" + userName + ", emailId=" + emailId + ", orderQuantity=" + orderQuantity
-				+ ", totalPrice=" + totalPrice + ", orderDate=" + orderDate + "]";
-	}
+	
+	
 
 }

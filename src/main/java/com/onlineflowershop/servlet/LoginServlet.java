@@ -26,11 +26,11 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		HttpSession session = request.getSession();
 		String emailId = request.getParameter("emailId");
 		String password = request.getParameter("password");
-		System.out.println("hi"+emailId);
+		
 
 		UserDAOImpl userDao = new UserDAOImpl();
 		User currentUser;
@@ -44,13 +44,13 @@ public class LoginServlet extends HttpServlet {
 			String user = currentUser.getName();
 			String email = currentUser.getEmailId();
 			session.setAttribute("emailId", email);
-			System.out.println(email);
+			
 
 			session.setAttribute("username", user);
 			int userId = currentUser.getUserId();
 
 			session.setAttribute("userId", userId);
-			System.out.println(role);
+			
 
 			if (role.equals("Admin")) {
 				System.out.println("admin");

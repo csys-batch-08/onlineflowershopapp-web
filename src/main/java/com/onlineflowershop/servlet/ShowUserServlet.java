@@ -1,6 +1,7 @@
 package com.onlineflowershop.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -21,17 +22,18 @@ public class ShowUserServlet extends HttpServlet {
 	
 	
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		UserDAOImpl userDao= new UserDAOImpl();
-		List<User> viewAllUser=userDao.showUser();
-		request.setAttribute("showUser",viewAllUser);
+		List<User> userlist;
+		try {
+		userlist=userDao.showUser();
+		request.setAttribute("viewAllUser",userlist);
 		RequestDispatcher rd =request.getRequestDispatcher("showUser.jsp");
 		rd.forward(request, response);
-		
-		
-		
+		}catch (SQLException e) {
+			e.getMessage();
+		}
 	}
 
 }

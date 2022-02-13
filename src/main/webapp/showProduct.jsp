@@ -75,24 +75,13 @@ background-size:cover;
 
 </head>
 <body>
-<form>
-
-
-
-
-
-
 <div class="topnav" >
-  
-  
-  <a href="category.jsp">Category</a>
-  <a href="myCart.jsp">My Order</a>
+
+<a href="CategoryServlet">Category</a>
+  <a href="MyCart">My Order</a>
   <a href="home.jsp">Back To Home </a>
- 
-   
-  
 
-
+<form>
 
 <table align="center" class="table table-hover">
 <tr>
@@ -122,8 +111,8 @@ background-size:cover;
 
 </table>
 
-
 </div>
+
 </form>
 </body>
 </html>

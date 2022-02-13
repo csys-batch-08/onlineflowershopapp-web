@@ -45,8 +45,7 @@ background-size:cover;
 <th>Wallet<th>
 </tr>
 
-<c:forEach var="show" items="${showUser}">
-
+<c:forEach var="show" items="${viewAllUser}">
 <tr>
 <td>${show.userId}</td>
 <td>${show.name}</td>

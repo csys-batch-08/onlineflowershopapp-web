@@ -43,11 +43,11 @@ background-size:cover;
 <div class="topnav" >
 
   
-   <a href="Admin.jsp">Back To Admin</a>
+   <a href="admin.jsp">Back To Admin</a>
    
 </div>
 <fieldset id="box"><center>
-<form action="AddProduct" method="post">
+<form action="AddProductServlet" method="post">
 
 Flower_Name:       <input type="text" name="flowerName"><br><br>
 
@@ -64,7 +64,7 @@ Category_Name:     <input type="text" name="categoryName"><br><br>
 <button type="submit" name="buttton"> Add</button> 
 
 </form>
-<a href="Home.jsp">Back To Home Page</a>
+<a href="home.jsp">Back To Home Page</a>
 
 </center></fieldset>
 

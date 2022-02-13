@@ -58,24 +58,12 @@ background-size:cover;
 
 <table border="2">
 <tr>
-<th>Flower Name</th>
-
-</tr>
-<c:forEach var="update" items="${updateProduct}">
-
-<tr>
-<td>${update.flowerName}</td>
-
-</tr>
-
-</table>
-</c:forEach>
 
 
 
 
 <fieldset id="box"><center>
-<form action="UpdateProduct" method="post">
+<form action="UpdateProductServlet" method="post">
 
  Old Flower Name:<input type="text" name="oldflowerName"><br><br>
  

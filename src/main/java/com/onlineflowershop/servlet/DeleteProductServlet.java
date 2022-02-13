@@ -18,7 +18,7 @@ import com.onlineflowershop.dao.impl.ProductDAOImpl;
 public class DeleteProductServlet extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 try {

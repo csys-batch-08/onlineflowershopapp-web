@@ -5,7 +5,7 @@
       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
      
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
 <style>
@@ -78,7 +78,7 @@ background-size:cover;
 </c:forEach>
 
 <fieldset id="box">
-<form action="DeleteProduct" method="post">
+<form action="DeleteProductServlet" method="post">
 
 FlowerId:<input type="number" name="FlowerId"><br><br>
 

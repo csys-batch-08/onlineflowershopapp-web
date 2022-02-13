@@ -1,7 +1,9 @@
 package com.onlineflowershop.servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +33,6 @@ public class AddProductServlet extends HttpServlet {
 		String color = request.getParameter("flowerColor");
 		double retail_price = Double.parseDouble(request.getParameter("flowerRetailPrice"));
 		String category_name = request.getParameter("categoryName");
-		
 		
 		
 		Product product =new Product(0,flower_name,flower_description,color,retail_price,category_name,0,null);

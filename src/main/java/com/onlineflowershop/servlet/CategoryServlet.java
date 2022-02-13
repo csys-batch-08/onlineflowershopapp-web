@@ -30,7 +30,7 @@ public class CategoryServlet extends HttpServlet {
 
 		try {
 			viewCategory=productDao.showCategory();
-			request.setAttribute("showCategory", viewCategory);
+			request.setAttribute("ShowCategory", viewCategory);
 			RequestDispatcher rd= request.getRequestDispatcher("category.jsp");
 			rd.forward(request,response);		
 		}catch(SQLException e) {

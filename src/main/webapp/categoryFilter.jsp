@@ -41,17 +41,17 @@ background-size:cover;
 <th style=color:black>Flower Rating</th>
 <th style=color:black>Buy Product</th>
 </tr>
-<c:forEach var="view" items="${showCategorylist}">
+<c:forEach var="view" items="${showCategory}">
 
 <tr>
-<td><img alt="#alter" src="${view.picture}" width="200" height="200"></td>
+<td><img src="${view.picture}" width="200" height="200"></td>
 <td style=color:black>${view.flowerName} </td>
 <td style=color:black>${view.flowerDescription}</td>
 <td style=color:black>${view.color}</td>
 <td style=color:black>${view.retailPrice}</td>
 <td style=color:black>${view.catName}</td>
 <td style=color:black>${view.rating}</td>
-<td><button><a href="order.jsp?flowerId${view.flowerId}&flowerName=${view.flowerName">Buy</a></button></td>
+<td><button class="button button1"><a href="OrderServlet?flowerId=${view.flowerId}&flowerName=${view.flowerName}&retailPrice=${view.retailPrice}"style="text-decoration:none;">Buy</a></button></td>
 </tr>
 </c:forEach>
 

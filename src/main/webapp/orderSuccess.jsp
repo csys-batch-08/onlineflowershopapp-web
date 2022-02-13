@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
 <style>
@@ -42,6 +42,7 @@ h1 {
 <body>
 	<div class="topnav">
 		<a href="home.jsp">Log Out</a>
+	    <a href="MyCart"> My Order</a>
 	</div>
 
 	<center>
@@ -64,10 +65,11 @@ h1 {
 		<form action="ratingHere.jsp" metohd="post">
 			<button type="submit" name="button">Rating</button>
 			<br>
-			<br> <a href="myCart.jsp">My Order</a>
+			<br> 
 
 
 		</form>
+		</div>
 	</center>
 
 

@@ -53,14 +53,15 @@ background-size:cover;
 <meta charset="ISO-8859-1">
 <title>ShowUser page</title>
 </head>
-<h1> hello </h1>
+
 <body>
 <div class="topnav" >
 
-   <a href="AboutUs.jsp">About Us</a>
+   <a href="aboutUs.jsp">About Us</a>
    
     
-   <a href="Admin.jsp">Back To Admin</a>
+   <a href="admin.jsp">Back To Admin</a>
+   
 </div>
 
 
