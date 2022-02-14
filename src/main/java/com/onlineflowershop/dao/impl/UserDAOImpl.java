@@ -91,13 +91,14 @@ public class UserDAOImpl implements UserDAO {
 
 		List<User> userlist = new ArrayList<>();
 
-		String showQuery = "select user_id,name,email_id,password,address,mobile_number,role,walllet";
+		String showQuery = "select user_id,name,email_id,password,address,mobile_number,role,walllet from user_details";
 		Connection con = null;
 		PreparedStatement stmt=null;
 		ResultSet rs =null;
 		try {
 			con = ConnectionUtil.getDbConnection();
 			stmt = con.prepareStatement(showQuery);
+			
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				User user = new User();
@@ -111,6 +112,7 @@ public class UserDAOImpl implements UserDAO {
 				user.setWallet(rs.getDouble(8));
 
 				userlist.add(user);
+				
 
 			}
 		} catch (SQLException e) {

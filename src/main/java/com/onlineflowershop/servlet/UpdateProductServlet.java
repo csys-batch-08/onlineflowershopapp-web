@@ -19,25 +19,21 @@ public class UpdateProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		ProductDAOImpl productDao = new ProductDAOImpl();
-		String new_flower_name = request.getParameter("newflowerName");
-		String old_flower_name = request.getParameter("oldflowerName");
-		int id;
 		try {
+			System.out.println("product");
+			ProductDAOImpl productDao = new ProductDAOImpl();
+			String new_flower_name = request.getParameter("newflowerName");
+			String old_flower_name = request.getParameter("oldflowerName");
+			int id;
 			id = productDao.findProductId1(old_flower_name);
-		
-
-		productDao.updateProduct(new_flower_name, id);
-
-		response.sendRedirect("admin.jsp");
+			productDao.updateProduct(new_flower_name, id);
+			response.sendRedirect("admin.jsp");
 		} catch (SQLException e) {
-			
+
 			e.getMessage();
 		}
-
 
 	}
 

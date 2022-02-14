@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.onlineflowershop.dao.impl.UserDAOImpl;
 import com.onlineflowershop.model.User;
 
-@WebServlet("/ShowUserServlet")
+@WebServlet("/ShowUser")
 public class ShowUserServlet extends HttpServlet {
 	
 	
@@ -22,16 +22,21 @@ public class ShowUserServlet extends HttpServlet {
 	
 	
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void service(HttpServletRequest request, HttpServletResponse response)  {
+		try {
 		UserDAOImpl userDao= new UserDAOImpl();
 		List<User> userlist;
-		try {
 		userlist=userDao.showUser();
+		
 		request.setAttribute("viewAllUser",userlist);
 		RequestDispatcher rd =request.getRequestDispatcher("showUser.jsp");
-		rd.forward(request, response);
-		}catch (SQLException e) {
+		
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			
+			e.getMessage();
+		} catch (IOException e) {
+			
 			e.getMessage();
 		}
 	}

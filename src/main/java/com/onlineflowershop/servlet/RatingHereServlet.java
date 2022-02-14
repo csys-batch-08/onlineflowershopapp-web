@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,10 +45,7 @@ public class RatingHereServlet extends HttpServlet {
 		}
 		int rating = oldRating + newRating;
 
-//		System.out.println("new rating=" + newRating);
-//		System.out.println("flower name=" + flowerName);
-//		System.out.println("oldrating=" + oldRating);
-//		System.out.println("updated rating=" + rating);
+
 
 		try {
 			ratingDao.updateRating(rating, flowerId);
@@ -57,8 +55,8 @@ public class RatingHereServlet extends HttpServlet {
 			
 			request.setAttribute("ShowRatings", showrating);
 			
-			response.sendRedirect("showrating.jsp");
-			
+			RequestDispatcher rd=request.getRequestDispatcher("showrating.jsp");
+			rd.forward(request,response);
 		} catch (SQLException e) {
 			
 			e.getMessage();

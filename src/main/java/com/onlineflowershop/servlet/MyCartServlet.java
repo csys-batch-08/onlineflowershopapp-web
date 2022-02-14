@@ -39,7 +39,7 @@ public class MyCartServlet extends HttpServlet {
 			request.setAttribute("viewOrder", orderlist);
             String emailId = session.getAttribute("CurrentUser").toString();
 			request.setAttribute("userName", emailId);
-
+            session.setAttribute("userName", emailId);
 			RequestDispatcher rd = request.getRequestDispatcher("myCart.jsp");
 			rd.forward(request, response);
 

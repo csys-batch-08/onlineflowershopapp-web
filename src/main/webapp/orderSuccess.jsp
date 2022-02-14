@@ -11,6 +11,14 @@
 	overflow: hidden;
 }
 
+h1 {
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+}
+
 .topnav a {
 	float: left;
 	color: pink;
@@ -41,37 +49,22 @@ h1 {
 </head>
 <body>
 	<div class="topnav">
-		<a href="home.jsp">Log Out</a>
-	    <a href="MyCart"> My Order</a>
+		<a href="home.jsp">Log Out</a> <a href="MyCart"> My Order</a>
 	</div>
 
-	<center>
-		<h1>Your Order is Placed Successfully!! Thank You!!</h1>
+	<h1>Your Order is Placed Successfully!! Thank You!!</h1>
 
-		<h2>
-			<i>Your Payment Is Debited From Your Wallet</i>
-		</h2>
-
-
-
-		<h2>
-			<i> Your Wallet Ballance Amount is: ${wallbal}</i>
-		</h2>
-
+	<h2>
+		<em>Your Payment Is Debited From Your Wallet</em>
+	</h2>
+	<h2>
+		<em> Your Wallet Ballance Amount is: ${wallbal}</em>
+	</h2>
+	<form action="ratingHere.jsp" metohd="post">
+		<button type="submit" name="button">Rating</button>
+		<br> <br>
 
 
-
-
-		<form action="ratingHere.jsp" metohd="post">
-			<button type="submit" name="button">Rating</button>
-			<br>
-			<br> 
-
-
-		</form>
-		</div>
-	</center>
-
-
+	</form>
 </body>
 </html>

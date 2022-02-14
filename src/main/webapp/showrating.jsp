@@ -10,19 +10,13 @@ background-image:url('assets/home.jpg');
 background-repeat:no-repeat;
 background-size:cover;
 }
-
 </style>
-
 <meta charset="ISO-8859-1">
 <title>Order Success</title>
 </head>
 <body>
 <form>
 <h3><i>your Rating was Added Successfully!!</i></h3>
-
-
-
-
 <h2><i>Highly Rated Flower</i></h2>
 <table align="left" border="5">
 <tr>
@@ -39,8 +33,6 @@ background-size:cover;
 </tbody>
 </c:forEach>
 </table>
-
-
 </form><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <a href="home.jsp">Back To Home Page</a>
 </body>

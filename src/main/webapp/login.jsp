@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,28 +15,20 @@ body {
 	background: url(assets/home.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
-	
-	
-	
 }
+
 .container {
-    
-  top: 50%;
+	top: 50%;
 	left: 50%;
 	position: absolute;
 	transform: translate(-50%, -50%);
 }
 
-
-
-.card{
-         padding:60px 40px 50px 40px;
-         background: rgb(50,50,50);
-         border-radius: 10px;
-            
-            
-            }
-
+.card {
+	padding: 60px 40px 50px 40px;
+	background: rgb(50, 50, 50);
+	border-radius: 10px;
+}
 
 #name {
 	width: 200px;
@@ -47,6 +39,7 @@ body {
 	margin-bottom: 20px;
 	color: white;
 }
+
 #button {
 	border-radius: 20px;
 	padding: 10px 20px;
@@ -58,42 +51,36 @@ body {
 	margin-left: 50px;
 }
 
-
-
 #button:hover {
-	background-color:pink;
+	background-color: pink;
 	color: red;
 	cursor: pointer;
 }
+
 a {
 	font-size: 16px;
 }
-
 </style>
 </head>
 <body>
 
-<form action="LoginServlet" method="post" >
+	<form action="LoginServlet" method="post">
+		<div class="container">
 
+			<div class="card">
+				<input type="email" name="emailId" placeholder="Email_id"
+					pattern="[A-Za-z0-9]+[@][a-zA-Z]+[.][a-z]+" autofocus Required><br>
+				<br> <input type="password" name="password"
+					placeholder="Password" Required><br>
+				<br>
 
-<div class="container">
+				<button type="submit" id="button">Login</button>
+				<br>
+				<br>
+	
+	</div>
 
-<div class="card">
-
-
-
-
-
-<input type="email"    name="emailId" placeholder="Email_id" pattern="[A-Za-z0-9]+[@][a-zA-Z]+[.][a-z]+" autofocus Required><br><br>
-<input type="password" name="password" placeholder="Password"   Required><br><br>
-
-<button type="submit" id="button">Login</button><br><br>
-
-
-
-</form>
-</div>
-
-</div>
+	</div>
+	</form>
 </body>
 </html>
