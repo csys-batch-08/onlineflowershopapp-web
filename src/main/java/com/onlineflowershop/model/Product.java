@@ -32,9 +32,12 @@ public class Product {
 		this.picture = picture;
 	}
 
+	
+
 	public Product() {
 		super();
 		
+	}
 
 	public Product(int flowerId, String flowerName, String flowerDescription, String color, double retailPrice,
 			String catName, double rating) {
