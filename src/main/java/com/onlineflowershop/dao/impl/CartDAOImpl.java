@@ -16,35 +16,34 @@ public class CartDAOImpl implements CartDAO {
 
 	@Override
 	public void insertCart(Cart cart) throws SQLException {
-		
+
 		String insertQuery = "insert into cart_items(flower_id,user_id,order_quantity,total_price) values(?,?,?,?)";
 
-		 
-		Connection con =null;
+		Connection con = null;
 		PreparedStatement pst = null;
 
 		try {
 			con = ConnectionUtil.getDbConnection();
-			
 			pst = con.prepareStatement(insertQuery);
+
 			pst.setInt(1, cart.getProductId());
 			pst.setInt(2, cart.getUserId());
 			pst.setInt(3, cart.getOrderQuantity());
 			pst.setDouble(4, cart.getTotalPrice());
 			pst.executeUpdate();
-			
+
 		} catch (SQLException e) {
 
 			e.getMessage();
-			
-		}finally {
-			if(con !=null) {
-				con.close();
-			}
-			if(pst !=null) {
+
+		} finally {
+			if (pst != null) {
 				pst.close();
 			}
-				
+			if (con != null) {
+				con.close();
+			}
+
 		}
 	}
 
@@ -56,13 +55,12 @@ public class CartDAOImpl implements CartDAO {
 
 		String listquery = "select flower_id,count(order_quantity),sum(total_price),user_id,trunc(order_date) from cart_items group by flower_id,user_id ,trunc(order_date)order by trunc(order_date) desc";
 		Connection con = null;
-		PreparedStatement pst =null;
-		ResultSet rs =null;
-		
+		PreparedStatement pst = null;
+		ResultSet rs = null;
 
 		try {
 			con = ConnectionUtil.getDbConnection();
-		    pst= con.prepareStatement(listquery);
+			pst = con.prepareStatement(listquery);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 
@@ -78,12 +76,11 @@ public class CartDAOImpl implements CartDAO {
 			}
 		} catch (Exception e) {
 			e.getMessage();
-		}
-		finally {
-			if(pst !=null) {
+		} finally {
+			if (pst != null) {
 				pst.close();
 			}
-			if(con !=null) {
+			if (con != null) {
 				con.close();
 			}
 		}
@@ -101,17 +98,16 @@ public class CartDAOImpl implements CartDAO {
 			pstmt = con.prepareStatement(updateQuery);
 			pstmt.setInt(1, Integer.parseInt(updateCart.split(",")[0]));
 			pstmt.setInt(2, Integer.parseInt(updateCart.split(",")[1]));
-		    pstmt.executeUpdate();
-			
-			
+			pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 
 			e.getMessage();
-		}finally {
-			if(pstmt !=null) {
+		} finally {
+			if (pstmt != null) {
 				pstmt.close();
 			}
-			if(con !=null) {
+			if (con != null) {
 				con.close();
 			}
 		}
@@ -122,24 +118,24 @@ public class CartDAOImpl implements CartDAO {
 	@Override
 	public void deleteCart(int userId) throws SQLException {
 		String deleteQuery = "delete from cart_items where cart_id=?";
-		Connection con =null;
-		PreparedStatement pstmt =null;
-				
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
 		try {
 			con = ConnectionUtil.getDbConnection();
 			pstmt = con.prepareStatement(deleteQuery);
 			pstmt.setInt(1, userId);
-		    pstmt.executeUpdate();
-			
+			pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 
 			e.getMessage();
 
-		}finally {
-			if(pstmt !=null) {
+		} finally {
+			if (pstmt != null) {
 				pstmt.close();
 			}
-			if(con !=null)
+			if (con != null)
 				con.close();
 		}
 	}
@@ -151,7 +147,7 @@ public class CartDAOImpl implements CartDAO {
 		String findcart = "select cart_id from product_details where user_id=?";
 
 		Connection con = ConnectionUtil.getDbConnection();
-		PreparedStatement pst =null;
+		PreparedStatement pst = null;
 		int cartId = 0;
 		try {
 			con = ConnectionUtil.getDbConnection();
@@ -161,16 +157,15 @@ public class CartDAOImpl implements CartDAO {
 			if (rs.next()) {
 				cartId = rs.getInt(1);
 			}
-			
 
 		} catch (SQLException e) {
 
 			e.getMessage();
-		}finally {
-			if(pst !=null) {
+		} finally {
+			if (pst != null) {
 				pst.close();
 			}
-			if(con !=null) {
+			if (con != null) {
 				con.close();
 			}
 		}
@@ -178,9 +173,6 @@ public class CartDAOImpl implements CartDAO {
 		return cartId;
 
 	}
-
-	
-		
 
 	@Override
 	public List<Cart> showUserCart(int userId) throws SQLException {
@@ -192,7 +184,7 @@ public class CartDAOImpl implements CartDAO {
 		PreparedStatement pstmt = null;
 
 		ResultSet rs = null;
-		
+
 		try {
 			con = ConnectionUtil.getDbConnection();
 			pstmt = con.prepareStatement(userCart);
@@ -208,11 +200,10 @@ public class CartDAOImpl implements CartDAO {
 				cart.setTotalPrice(rs.getDouble(5));
 				cart.setOrderDate(rs.getDate(6).toLocalDate());
 				orderlist.add(cart);
-				
 
 			}
 			return orderlist;
-			
+
 		} catch (SQLException e) {
 
 			e.getMessage();
@@ -227,8 +218,7 @@ public class CartDAOImpl implements CartDAO {
 		}
 
 		return orderlist;
-	
+
 	}
 
-	
 }

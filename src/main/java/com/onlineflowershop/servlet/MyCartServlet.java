@@ -15,14 +15,10 @@ import javax.servlet.http.HttpSession;
 import com.onlineflowershop.dao.impl.CartDAOImpl;
 import com.onlineflowershop.model.Cart;
 
-/**
- * Servlet implementation class MyCartServlet
- */
 @WebServlet("/MyCart")
 public class MyCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -35,11 +31,11 @@ public class MyCartServlet extends HttpServlet {
 		List<Cart> orderlist;
 		try {
 			orderlist = cartDao.showUserCart(userId);
-			
+
 			request.setAttribute("viewOrder", orderlist);
-            String emailId = session.getAttribute("CurrentUser").toString();
+			String emailId = session.getAttribute("CurrentUser").toString();
 			request.setAttribute("userName", emailId);
-            session.setAttribute("userName", emailId);
+			session.setAttribute("userName", emailId);
 			RequestDispatcher rd = request.getRequestDispatcher("myCart.jsp");
 			rd.forward(request, response);
 

@@ -31,16 +31,16 @@ public class UserDAOImpl implements UserDAO {
 			pst.setString(4, user.getAddress());
 			pst.setLong(5, user.getMobileNumber());
 			pst.executeUpdate();
-			
+
 		} catch (SQLException e) {
-			
+
 			e.getMessage();
-			
-		}finally {
-			if(pst!=null) {
+
+		} finally {
+			if (pst != null) {
 				pst.close();
 			}
-			if(con !=null) {
+			if (con != null) {
 				con.close();
 			}
 		}
@@ -51,21 +51,21 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User validateUser(String emailId, String password) throws SQLException {
-		String validateQuery = "select user_id,name,email_id,password,address,mobile_number,role,walllet from user_details where email_id='" + emailId + "'and password='" + password
-				+ "'";
-		
-		Connection con =null;
-		User user=null;
-		PreparedStatement pstmt=null;
+		String validateQuery = "select user_id,name,email_id,password,address,mobile_number,role,walllet from user_details where email_id='"
+				+ emailId + "'and password='" + password + "'";
+
+		Connection con = null;
+		User user = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
 
-		    con= ConnectionUtil.getDbConnection();
+			con = ConnectionUtil.getDbConnection();
 			pstmt = con.prepareStatement(validateQuery);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				 user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getLong(6), rs.getString(7), rs.getDouble(8));
 
 				return user;
@@ -73,12 +73,12 @@ public class UserDAOImpl implements UserDAO {
 		} catch (SQLException e) {
 
 			e.getMessage();
-			
-		}finally {
-			if(pstmt !=null) {
+
+		} finally {
+			if (pstmt != null) {
 				pstmt.close();
 			}
-			if(con !=null) {
+			if (con != null) {
 				con.close();
 			}
 		}
@@ -93,12 +93,12 @@ public class UserDAOImpl implements UserDAO {
 
 		String showQuery = "select user_id,name,email_id,password,address,mobile_number,role,walllet from user_details";
 		Connection con = null;
-		PreparedStatement stmt=null;
-		ResultSet rs =null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		try {
 			con = ConnectionUtil.getDbConnection();
 			stmt = con.prepareStatement(showQuery);
-			
+
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				User user = new User();
@@ -112,11 +112,10 @@ public class UserDAOImpl implements UserDAO {
 				user.setWallet(rs.getDouble(8));
 
 				userlist.add(user);
-				
 
 			}
 		} catch (SQLException e) {
-			
+
 			e.getMessage();
 		}
 		return userlist;
@@ -128,7 +127,7 @@ public class UserDAOImpl implements UserDAO {
 		String updateQuery = "update user_details set password=?  where email_id=?";
 
 		Connection con = null;
-		PreparedStatement pstmt=null;
+		PreparedStatement pstmt = null;
 
 		try {
 			con = ConnectionUtil.getDbConnection();
@@ -136,16 +135,16 @@ public class UserDAOImpl implements UserDAO {
 			pstmt = con.prepareStatement(updateQuery);
 			pstmt.setString(1, update);
 			pstmt.setString(2, update);
-		    pstmt.executeUpdate();
-			
+			pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			e.getMessage();
-		}finally {
-			if(pstmt !=null) {
+		} finally {
+			if (pstmt != null) {
 				pstmt.close();
 			}
-			if(con !=null) {
-			  con.close();	
+			if (con != null) {
+				con.close();
 			}
 		}
 	}
@@ -156,23 +155,23 @@ public class UserDAOImpl implements UserDAO {
 	public void deletedetails(String delete) throws SQLException {
 		String deleteQuery = "delete from user_details where email_id=?";
 
-		Connection con =null;
-		PreparedStatement pstmt =null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		try {
 			con = ConnectionUtil.getDbConnection();
-		    pstmt = con.prepareStatement(deleteQuery);
+			pstmt = con.prepareStatement(deleteQuery);
 			pstmt.setString(1, delete);
-		    pstmt.executeUpdate();
-			
+			pstmt.executeUpdate();
+
 			pstmt.close();
 			con.close();
 		} catch (SQLException e) {
 			e.getMessage();
-		}finally {
-			if(pstmt !=null) {
+		} finally {
+			if (pstmt != null) {
 				pstmt.close();
 			}
-			if(con !=null) {
+			if (con != null) {
 				con.close();
 			}
 		}
@@ -185,9 +184,8 @@ public class UserDAOImpl implements UserDAO {
 
 		String findUserID = "select user_id from user_details where name='" + Name + "'";
 		Connection con = ConnectionUtil.getDbConnection();
-		PreparedStatement pstmt=null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
 
 		int userId = 0;
 		try {
@@ -200,13 +198,13 @@ public class UserDAOImpl implements UserDAO {
 			}
 
 		} catch (SQLException e) {
-			
+
 			e.getMessage();
-		}finally {
-			if(pstmt !=null) {
+		} finally {
+			if (pstmt != null) {
 				pstmt.close();
 			}
-			if(con !=null) {
+			if (con != null) {
 				con.close();
 			}
 		}
@@ -220,14 +218,14 @@ public class UserDAOImpl implements UserDAO {
 		ResultSet rs = null;
 		try {
 			Connection con = ConnectionUtil.getDbConnection();
-			
+
 			String query = "select user_wallet from user_details where user_id = ?";
 			PreparedStatement statement = con.prepareStatement(query);
 			statement.setInt(1, id);
 			rs = statement.executeQuery();
 
 		} catch (SQLException e) {
-			
+
 			e.getMessage();
 		}
 		return rs;
@@ -244,10 +242,10 @@ public class UserDAOImpl implements UserDAO {
 			PreparedStatement statement = con.prepareStatement(query);
 			statement.setInt(1, amount);
 			statement.setInt(2, userid);
-			
+
 			res = statement.executeUpdate();
 		} catch (SQLException e) {
-			
+
 			e.getMessage();
 
 		}

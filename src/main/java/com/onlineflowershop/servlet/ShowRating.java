@@ -13,24 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import com.onlineflowershop.dao.impl.ProductDAOImpl;
 import com.onlineflowershop.model.Product;
 
-
 @WebServlet("/ShowRating")
 public class ShowRating extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-  
+
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		try {
-		ProductDAOImpl product=new ProductDAOImpl();
-		List<Product> showrating=product.showRating();
-		
-		request.setAttribute("ShowRatings", showrating);
-		
-		
-		
-		}catch(SQLException e) {
+			ProductDAOImpl product = new ProductDAOImpl();
+			List<Product> showrating = product.showRating();
+
+			request.setAttribute("ShowRatings", showrating);
+
+		} catch (SQLException e) {
 			e.getMessage();
 		}
 	}

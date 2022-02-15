@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.onlineflowershop.dao.impl.UserDAOImpl;
 import com.onlineflowershop.model.User;
 
-/**
- * Servlet implementation class Register
- */
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

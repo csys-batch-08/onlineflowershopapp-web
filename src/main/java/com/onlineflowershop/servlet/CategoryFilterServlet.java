@@ -20,21 +20,20 @@ import com.onlineflowershop.model.Product;
 @WebServlet("/CategoryFilterServlet")
 public class CategoryFilterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String categoryname=request.getParameter("categoryname");
-		ProductDAOImpl productDao =new ProductDAOImpl();
+
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String categoryname = request.getParameter("categoryname");
+		ProductDAOImpl productDao = new ProductDAOImpl();
 		List<Product> viewList;
 		try {
-			viewList=productDao.showCategoryList(categoryname);
-			request.setAttribute("showCategory",viewList);
-			RequestDispatcher rd=request.getRequestDispatcher("categoryFilter.jsp");
+			viewList = productDao.showCategoryList(categoryname);
+			request.setAttribute("showCategory", viewList);
+			RequestDispatcher rd = request.getRequestDispatcher("categoryFilter.jsp");
 			rd.forward(request, response);
-			
-					
-		}catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.getMessage();
 		}
 	}

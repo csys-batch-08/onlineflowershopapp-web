@@ -19,24 +19,23 @@ import com.onlineflowershop.dao.impl.WalletDAOImpl;
 public class CheckWalletServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		HttpSession session = request.getSession();
 
 		String Name = session.getAttribute("CurrentUser1").toString();
-		
-try {
-		WalletDAOImpl WalletCheck = new WalletDAOImpl();
 
-		WalletCheck.rechargeWallet(Name);
+		try {
+			WalletDAOImpl WalletCheck = new WalletDAOImpl();
 
-		response.sendRedirect("order.jsp");
+			WalletCheck.rechargeWallet(Name);
 
-	}catch(SQLException e) {
-		e.getMessage();
-	}
+			response.sendRedirect("order.jsp");
+
+		} catch (SQLException e) {
+			e.getMessage();
+		}
 	}
 }

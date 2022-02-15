@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.onlineflowershop.dao.impl.ProductDAOImpl;
 
-/**
- * Servlet implementation class UpdateProductServlet
- */
 @WebServlet("/UpdateProductServlet")
 public class UpdateProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

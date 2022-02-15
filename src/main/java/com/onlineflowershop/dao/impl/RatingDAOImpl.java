@@ -9,70 +9,62 @@ import com.onlineflowershop.dao.RatingDAO;
 import com.onlineflowershop.util.ConnectionUtil;
 
 public class RatingDAOImpl implements RatingDAO {
-	
-	
-	public  void updateRating(int rating,int flowerId) throws SQLException{
-		String updateQuery="update inventory set rating=? where flower_id=?";
-	
-		Connection con=null;
-		PreparedStatement pstmt=null;
+
+	public void updateRating(int rating, int flowerId) throws SQLException {
+		String updateQuery = "update inventory set rating=? where flower_id=?";
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		try {
-			con=ConnectionUtil.getDbConnection();
+			con = ConnectionUtil.getDbConnection();
 			pstmt = con.prepareStatement(updateQuery);
-			pstmt.setInt(1,rating);
-			pstmt.setInt(2, flowerId);			
+			pstmt.setInt(1, rating);
+			pstmt.setInt(2, flowerId);
 			pstmt.executeUpdate();
-			
-			
+
 		} catch (SQLException e) {
-			
+
 			e.getMessage();
-		}finally {
-			if(con !=null) {
+		} finally {
+			if (con != null) {
 				con.close();
 			}
-			if(pstmt !=null) {
+			if (pstmt != null) {
 				pstmt.close();
 			}
 		}
-		
-		
+
 	}
-	public  int findRating(String flowerName) throws SQLException
-	{
-		String findRating="select rating from inventory where flower_name='"+flowerName+"'";
-		Connection con=null;
-		PreparedStatement stmt =null ;
-		int rating=0;
-		ResultSet rs=null;
+
+	public int findRating(String flowerName) throws SQLException {
+		String findRating = "select rating from inventory where flower_name='" + flowerName + "'";
+		Connection con = null;
+		PreparedStatement stmt = null;
+		int rating = 0;
+		ResultSet rs = null;
 		try {
-			con=ConnectionUtil.getDbConnection();
+			con = ConnectionUtil.getDbConnection();
 			stmt = con.prepareStatement(findRating);
-			
-		     rs=stmt.executeQuery();
-			if(rs.next())
-			{
-			rating=rs.getInt(1);
-			
+
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				rating = rs.getInt(1);
+
 			}
-			
+
 		} catch (SQLException e) {
-			
+
 			e.getMessage();
-		}finally {
-			if(con !=null) {
+		} finally {
+			if (con != null) {
 				con.close();
 			}
-			if(stmt !=null) {
+			if (stmt != null) {
 				stmt.close();
 			}
 		}
 		return rating;
-		
+
 	}
 
 }
-
-	
-
-

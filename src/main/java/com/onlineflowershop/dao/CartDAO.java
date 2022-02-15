@@ -11,11 +11,8 @@ public interface CartDAO {
 
 	public void updateCart(String updateCart) throws SQLException;
 
-	
-
 	public int findCartId(int cart) throws SQLException;
 
-	
 	public List<Cart> showUserCart(int userId) throws SQLException;
 
 	public List<Cart> showCart() throws SQLException;

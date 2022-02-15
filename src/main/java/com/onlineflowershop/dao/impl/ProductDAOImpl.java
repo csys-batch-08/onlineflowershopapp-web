@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -49,11 +48,11 @@ public class ProductDAOImpl implements ProductDAO {
 		} catch (SQLException e) {
 
 			e.getMessage();
-		}finally {
-			if(con !=null) {
+		} finally {
+			if (con != null) {
 				con.close();
 			}
-			if(stmt !=null) {
+			if (stmt != null) {
 				stmt.close();
 			}
 		}
@@ -68,7 +67,6 @@ public class ProductDAOImpl implements ProductDAO {
 	public void insertProduct(Product product) throws SQLException {
 		String insertQuery = "insert into inventory(flower_name,flower_description,color,retail_price,category_name) values(?,?,?,?,?)";
 
-		
 		Connection con = null;
 		PreparedStatement pst = null;
 
@@ -81,16 +79,16 @@ public class ProductDAOImpl implements ProductDAO {
 			pst.setDouble(4, product.getRetailPrice());
 			pst.setString(5, product.getCatName());
 			pst.executeUpdate();
-			
+
 		} catch (SQLException e) {
 
 			e.getMessage();
-			
-		}finally {
-			if(pst !=null) {
+
+		} finally {
+			if (pst != null) {
 				pst.close();
 			}
-			if(con !=null) {
+			if (con != null) {
 				con.close();
 			}
 		}
@@ -102,23 +100,22 @@ public class ProductDAOImpl implements ProductDAO {
 	public void updateProduct(String flowerName, int flowerId) throws SQLException {
 		String updateQuery = "update inventory set flower_name =?  where flower_id=?";
 		Connection con = null;
-		PreparedStatement pstmt =null;
+		PreparedStatement pstmt = null;
 		try {
 			con = ConnectionUtil.getDbConnection();
 			pstmt = con.prepareStatement(updateQuery);
 			pstmt.setString(1, flowerName);
 			pstmt.setInt(2, flowerId);
-	pstmt.executeUpdate();
-			
-			
+			pstmt.executeUpdate();
+
 		} catch (SQLException e) {
-			
+
 			e.getMessage();
-		}finally {
-			if(pstmt !=null) {
+		} finally {
+			if (pstmt != null) {
 				pstmt.close();
 			}
-			if(con !=null) {
+			if (con != null) {
 				con.close();
 			}
 		}
@@ -132,21 +129,20 @@ public class ProductDAOImpl implements ProductDAO {
 		String updateQuery = "update inventory set Ratings=? where flower_name=?";
 
 		Connection con = null;
-		PreparedStatement pstmt =null;
+		PreparedStatement pstmt = null;
 		try {
 			con = ConnectionUtil.getDbConnection();
 			pstmt = con.prepareStatement(updateQuery);
 			pstmt.executeUpdate();
-			
 
 		} catch (SQLException e) {
 
 			e.getMessage();
-		}finally {
-			if(pstmt !=null) {
+		} finally {
+			if (pstmt != null) {
 				pstmt.close();
 			}
-			if(con !=null) {
+			if (con != null) {
 				con.close();
 			}
 		}
@@ -160,22 +156,21 @@ public class ProductDAOImpl implements ProductDAO {
 		String deleteQuery = "delete from inventory where flower_id=?";
 
 		Connection con = null;
-		PreparedStatement pstmt =null;
+		PreparedStatement pstmt = null;
 		try {
 			con = ConnectionUtil.getDbConnection();
 			pstmt = con.prepareStatement(deleteQuery);
 			pstmt.setInt(1, flowerId);
 			pstmt.executeUpdate();
-			
-			
+
 		} catch (SQLException e) {
 
 			e.getMessage();
-		}finally {
-			if(pstmt !=null) {
+		} finally {
+			if (pstmt != null) {
 				pstmt.close();
 			}
-			if(con !=null) {
+			if (con != null) {
 				con.close();
 			}
 		}
@@ -185,30 +180,31 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public int findProductId1(String productName) throws SQLException {
-		String selectquery = "select flower_id from inventory where flower_name='" + productName + "'";
+		String selectquery = "select flower_id from inventory where flower_name=?";
 
 		Connection con = null;
-		PreparedStatement stmt=null;
+		PreparedStatement stmt = null;
 		int proId = 0;
 		ResultSet rs = null;
+		
 
 		try {
 			con = ConnectionUtil.getDbConnection();
 			stmt = con.prepareStatement(selectquery);
-
-			rs=stmt.executeQuery();
-			if(rs.next()) {
+			stmt.setString(1, productName);
+            stmt.executeUpdate();
+			if (rs.next()) {
 				proId = rs.getInt(1);
 			}
 
 		} catch (SQLException e) {
 
 			e.getMessage();
-		}finally {
-			if(stmt !=null) {
+		} finally {
+			if (stmt != null) {
 				stmt.close();
 			}
-			if(con !=null) {
+			if (con != null) {
 				con.close();
 			}
 		}
@@ -219,29 +215,25 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public int findPrice(int productId) throws SQLException {
-		String pricequery = "select retail_price from inventory where flower_id='" + productId + "'";
+		String pricequery = "select retail_price from inventory where flower_id=?";
 
-		Connection con =null;
-		PreparedStatement stmt =null;
+		Connection con = null;
+		PreparedStatement stmt = null;
 		
 
 		try {
 			con = ConnectionUtil.getDbConnection();
 			stmt = con.prepareStatement(pricequery);
-            stmt.setInt(1, productId);
-			
-
-			
-
+			stmt.setInt(1, productId);
+            ResultSet rs=stmt.executeQuery();
 		} catch (SQLException e) {
-
 			e.getMessage();
-		}finally {
-			
-			if(stmt !=null) {
+		} finally {
+
+			if (stmt != null) {
 				stmt.close();
 			}
-			if(con !=null) {
+			if (con != null) {
 				con.close();
 			}
 		}
@@ -252,25 +244,26 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<Product> findCategory(String categoryName) throws SQLException {
-           List<Product> category=new ArrayList<>();
-		
-		String showQuery = "select flower_id,flowr_name,flower_description,color,retail_price,category_name,rating from inventory where category_name='" + categoryName + "'";
+		List<Product> category = new ArrayList<>();
+
+		String showQuery = "select flower_id,flowr_name,flower_description,color,retail_price,category_name,rating from inventory where category_name=?";
+				
 		Connection con = null;
-		PreparedStatement stmt=null;
-		ResultSet rs = null;
+		PreparedStatement stmt = null;
+
 		try {
-			 con = ConnectionUtil.getDbConnection();
-			 stmt = con.prepareStatement(showQuery);
-			rs = stmt.executeQuery();
+			con = ConnectionUtil.getDbConnection();
+			stmt = con.prepareStatement(showQuery);
+			stmt.executeQuery();
 
 		} catch (SQLException e) {
 
 			e.getMessage();
-		}finally {
-			if(stmt!=null) {
+		} finally {
+			if (stmt != null) {
 				stmt.close();
 			}
-			if(con !=null)
+			if (con != null)
 				con.close();
 		}
 
@@ -280,39 +273,39 @@ public class ProductDAOImpl implements ProductDAO {
 	// show rating
 
 	public List<Product> showRating() throws SQLException {
-		List<Product> rating=new ArrayList<>();
+		List<Product> rating = new ArrayList<>();
 
 		String showquery = "select flower_name,rating from inventory order by rating desc";
 
-		Connection con =null;
+		Connection con = null;
 		ResultSet rs = null;
-		PreparedStatement stmt =null;
+		PreparedStatement stmt = null;
 		try {
-			 con = ConnectionUtil.getDbConnection();
+			con = ConnectionUtil.getDbConnection();
 			stmt = con.prepareStatement(showquery);
 			rs = stmt.executeQuery();
-			
-			while(rs.next()) {
-				Product flower=new Product();
+
+			while (rs.next()) {
+				Product flower = new Product();
 				flower.setFlowerName(rs.getString(1));
-				
-				double ratingAverage= rs.getDouble(2);
+
+				double ratingAverage = rs.getDouble(2);
 				NumberFormat formatter = new DecimalFormat("#0.00");
 				ratingAverage = Double.parseDouble(formatter.format(ratingAverage));
 
 				flower.setRating(ratingAverage);
 
 				rating.add(flower);
-				
+
 			}
 		} catch (SQLException e) {
 
 			e.getMessage();
-		}finally {
-			if(stmt!=null) {
+		} finally {
+			if (stmt != null) {
 				stmt.close();
 			}
-			if(con !=null)
+			if (con != null)
 				con.close();
 		}
 

@@ -20,18 +20,17 @@ public class ShowProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 
 			throws ServletException, IOException {
 
 		try {
-		ProductDAOImpl productDao = new ProductDAOImpl();
-		List<Product> showProduct = productDao.viewProduct();
-		request.setAttribute("viewProduct", showProduct);
-		RequestDispatcher rd = request.getRequestDispatcher("showProduct.jsp");
-		rd.forward(request, response);
-		}catch(SQLException e){
+			ProductDAOImpl productDao = new ProductDAOImpl();
+			List<Product> showProduct = productDao.viewProduct();
+			request.setAttribute("viewProduct", showProduct);
+			RequestDispatcher rd = request.getRequestDispatcher("showProduct.jsp");
+			rd.forward(request, response);
+		} catch (SQLException e) {
 			e.getMessage();
 		}
 	}

@@ -17,24 +17,22 @@ import com.onlineflowershop.dao.impl.ProductDAOImpl;
 @WebServlet("/DeleteProductServlet")
 public class DeleteProductServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-try {
-		ProductDAOImpl productDao = new ProductDAOImpl();
-		int flower_id = Integer.parseInt(request.getParameter("FlowerId"));
-		productDao.deleteProduct(flower_id);
 
-		response.sendRedirect("admin.jsp");
+		try {
+			ProductDAOImpl productDao = new ProductDAOImpl();
+			int flower_id = Integer.parseInt(request.getParameter("FlowerId"));
+			productDao.deleteProduct(flower_id);
 
-	}catch(SQLException e) {
-		e.getMessage();
-	}	}
+			response.sendRedirect("admin.jsp");
+
+		} catch (SQLException e) {
+			e.getMessage();
+		}
+	}
 
 }

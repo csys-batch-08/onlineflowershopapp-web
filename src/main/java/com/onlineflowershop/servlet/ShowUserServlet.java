@@ -16,27 +16,25 @@ import com.onlineflowershop.model.User;
 
 @WebServlet("/ShowUser")
 public class ShowUserServlet extends HttpServlet {
-	
-	
-	private static final long serialVersionUID=1L;
-	
-	
+
+	private static final long serialVersionUID = 1L;
+
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response)  {
+	protected void service(HttpServletRequest request, HttpServletResponse response) {
 		try {
-		UserDAOImpl userDao= new UserDAOImpl();
-		List<User> userlist;
-		userlist=userDao.showUser();
-		
-		request.setAttribute("viewAllUser",userlist);
-		RequestDispatcher rd =request.getRequestDispatcher("showUser.jsp");
-		
+			UserDAOImpl userDao = new UserDAOImpl();
+			List<User> userlist;
+			userlist = userDao.showUser();
+
+			request.setAttribute("viewAllUser", userlist);
+			RequestDispatcher rd = request.getRequestDispatcher("showUser.jsp");
+
 			rd.forward(request, response);
 		} catch (ServletException e) {
-			
+
 			e.getMessage();
 		} catch (IOException e) {
-			
+
 			e.getMessage();
 		}
 	}

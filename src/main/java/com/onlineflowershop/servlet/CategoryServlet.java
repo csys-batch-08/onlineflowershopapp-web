@@ -24,18 +24,18 @@ public class CategoryServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		ProductDAOImpl productDao=new ProductDAOImpl();
+
+		ProductDAOImpl productDao = new ProductDAOImpl();
 		List<Product> viewCategory;
 
 		try {
-			viewCategory=productDao.showCategory();
+			viewCategory = productDao.showCategory();
 			request.setAttribute("ShowCategory", viewCategory);
-			RequestDispatcher rd= request.getRequestDispatcher("category.jsp");
-			rd.forward(request,response);		
-		}catch(SQLException e) {
-		
-		e.getMessage();
-	}
+			RequestDispatcher rd = request.getRequestDispatcher("category.jsp");
+			rd.forward(request, response);
+		} catch (SQLException e) {
+
+			e.getMessage();
+		}
 	}
 }

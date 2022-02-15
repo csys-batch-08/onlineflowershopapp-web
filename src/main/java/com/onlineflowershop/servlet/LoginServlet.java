@@ -18,62 +18,56 @@ import com.onlineflowershop.model.User;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		HttpSession session = request.getSession();
 		String emailId = request.getParameter("emailId");
 		String password = request.getParameter("password");
-		
 
 		UserDAOImpl userDao = new UserDAOImpl();
 		User currentUser;
 		try {
 			currentUser = userDao.validateUser(emailId, password);
-		
-		if (currentUser != null) {
-			String role = currentUser.getRole();
 
-			session.setAttribute("currentUser", currentUser);
-			String user = currentUser.getName();
-			String email = currentUser.getEmailId();
-			session.setAttribute("emailId", email);
-			
+			if (currentUser != null) {
+				String role = currentUser.getRole();
 
-			session.setAttribute("username", user);
-			int userId = currentUser.getUserId();
+				session.setAttribute("currentUser", currentUser);
+				String user = currentUser.getName();
+				String email = currentUser.getEmailId();
+				session.setAttribute("emailId", email);
 
-			session.setAttribute("userId", userId);
-			
+				session.setAttribute("username", user);
+				int userId = currentUser.getUserId();
 
-			if (role.equals("Admin")) {
-				System.out.println("admin");
-				response.sendRedirect("admin.jsp");
+				session.setAttribute("userId", userId);
+
+				if (role.equals("Admin")) {
+					System.out.println("admin");
+					response.sendRedirect("admin.jsp");
+				}
+
+				else if (role.equals("user")) {
+
+					session.setAttribute("currentUser1", currentUser.getName());
+
+					session.setAttribute("currentUser1", currentUser.getName());
+
+					WalletDAOImpl WalletBal = new WalletDAOImpl();
+					int walletBallance = WalletBal.walletbal(userId);
+
+					response.sendRedirect("ShowProductServlet");
+
+				}
 			}
+		} catch (SQLException e1) {
 
-			else if (role.equals("user")) {
-
-				session.setAttribute("currentUser1", currentUser.getName());
-
-				session.setAttribute("currentUser1", currentUser.getName());
-
-				WalletDAOImpl WalletBal = new WalletDAOImpl();
-				int walletBallance = WalletBal.walletbal(userId);
-
-				
-				response.sendRedirect("ShowProductServlet");
-
-			}
-		}} catch (SQLException e1) {
-			
 			e1.getMessage();
-		} 
+		}
 
 	}
 
