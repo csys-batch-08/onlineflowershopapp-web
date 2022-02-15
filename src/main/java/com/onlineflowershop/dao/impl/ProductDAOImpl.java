@@ -122,7 +122,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	}
 
-	// rating insert
+
 	@Override
 	public void insertRating(int insertRating) throws SQLException {
 
