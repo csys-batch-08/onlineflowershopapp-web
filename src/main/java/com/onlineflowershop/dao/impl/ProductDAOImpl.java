@@ -61,7 +61,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	}
 
-	// add new product
+	
 
 	@Override
 	public void insertProduct(Product product) throws SQLException {
@@ -95,7 +95,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	}
 
-	// update product
+	
 	@Override
 	public void updateProduct(String flowerName, int flowerId) throws SQLException {
 		String updateQuery = "update inventory set flower_name =?  where flower_id=?";
@@ -176,7 +176,6 @@ public class ProductDAOImpl implements ProductDAO {
 		}
 	}
 
-	// find product id
 
 	@Override
 	public int findProductId1(String productName) throws SQLException {
@@ -270,7 +269,7 @@ public class ProductDAOImpl implements ProductDAO {
 		return category;
 	}
 
-	// show rating
+
 
 	public List<Product> showRating() throws SQLException {
 		List<Product> rating = new ArrayList<>();
