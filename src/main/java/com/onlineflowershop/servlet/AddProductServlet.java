@@ -22,13 +22,13 @@ public class AddProductServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		ProductDAOImpl productDao = new ProductDAOImpl();
-		String flower_name = request.getParameter("flowerName");
-		String flower_description = request.getParameter("flowerDescription");
+		String flower_Name = request.getParameter("flowerName");
+		String flower_Description = request.getParameter("flowerDescription");
 		String color = request.getParameter("flowerColor");
-		double retail_price = Double.parseDouble(request.getParameter("flowerRetailPrice"));
-		String category_name = request.getParameter("categoryName");
+		double retail_Price = Double.parseDouble(request.getParameter("flowerRetailPrice"));
+		String category_Name = request.getParameter("categoryName");
 
-		Product product = new Product(0, flower_name, flower_description, color, retail_price, category_name, 0, null);
+		Product product = new Product(0, flower_Name, flower_Description, color, retail_Price, category_Name, 0, null);
 
 		try {
 			productDao.insertProduct(product);

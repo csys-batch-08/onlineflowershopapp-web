@@ -20,7 +20,7 @@ public class ShowUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			UserDAOImpl userDao = new UserDAOImpl();
 			List<User> userlist;
@@ -30,14 +30,7 @@ public class ShowUserServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("showUser.jsp");
 
 			rd.forward(request, response);
-		} catch (ServletException e) {
-
-			e.getMessage();
-		} catch (IOException e) {
-
-			e.getMessage();
-		} catch (SQLException e) {
-		
+		} catch(SQLException e) {
 			e.getMessage();
 		}
 	}

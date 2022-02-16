@@ -25,8 +25,8 @@ public class DeleteProductServlet extends HttpServlet {
 
 		try {
 			ProductDAOImpl productDao = new ProductDAOImpl();
-			int flower_id = Integer.parseInt(request.getParameter("FlowerId"));
-			productDao.deleteProduct(flower_id);
+			int flower_Id = Integer.parseInt(request.getParameter("FlowerId"));
+			productDao.deleteProduct(flower_Id);
 
 			response.sendRedirect("admin.jsp");
 

@@ -25,12 +25,12 @@ public class CheckWalletServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		String Name = session.getAttribute("CurrentUser1").toString();
+		String name = session.getAttribute("CurrentUser1").toString();
 
 		try {
-			WalletDAOImpl WalletCheck = new WalletDAOImpl();
+			WalletDAOImpl walletCheck = new WalletDAOImpl();
 
-			WalletCheck.rechargeWallet(Name);
+			walletCheck.rechargeWallet(name);
 
 			response.sendRedirect("order.jsp");
 

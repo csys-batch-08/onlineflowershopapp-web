@@ -186,7 +186,7 @@ public class UserDAOImpl implements UserDAO {
 	// find user id method
 
 	@Override
-	public int findUserId(String Name) throws SQLException {
+	public int findUserId(String name) throws SQLException {
 
 		String findUserID = "select user_id from user_details where name= ?";
 		Connection con = null;

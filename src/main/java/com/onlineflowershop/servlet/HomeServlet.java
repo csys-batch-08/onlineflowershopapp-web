@@ -26,7 +26,7 @@ public class HomeServlet extends HttpServlet {
 
 		List<Product> productsList;
 		try {
-			productsList = (List<Product>) proDao.viewProduct();
+			productsList =proDao.viewProduct();
 
 			for (int i = 0; i < productsList.size(); i++) {
 				}
@@ -35,10 +35,7 @@ public class HomeServlet extends HttpServlet {
 			session.setAttribute("productsList", productsList);
 			response.sendRedirect("home.jsp");
 
-		} catch (IOException e) {
-			e.getMessage();
-		} catch (SQLException e) {
-			
+		}catch(SQLException e) {
 			e.getMessage();
 		}
 	}

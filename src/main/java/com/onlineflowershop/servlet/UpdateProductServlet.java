@@ -19,13 +19,13 @@ public class UpdateProductServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			System.out.println("product");
+			
 			ProductDAOImpl productDao = new ProductDAOImpl();
-			String new_flower_name = request.getParameter("newflowerName");
-			String old_flower_name = request.getParameter("oldflowerName");
+			String new_Flower_Name = request.getParameter("newflowerName");
+			String old_Flower_Name = request.getParameter("oldflowerName");
 			int id;
-			id = productDao.findProductId1(old_flower_name);
-			productDao.updateProduct(new_flower_name, id);
+			id = productDao.findProductId1(old_Flower_Name);
+			productDao.updateProduct(new_Flower_Name, id);
 			response.sendRedirect("admin.jsp");
 		} catch (SQLException e) {
 

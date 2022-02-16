@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.onlineflowershop.dao.impl.CartDAOImpl;
-import com.onlineflowershop.dao.impl.UserDAOImpl;
 import com.onlineflowershop.dao.impl.WalletDAOImpl;
 import com.onlineflowershop.model.Cart;
 
@@ -29,7 +28,7 @@ public class OrderSucessServlet extends HttpServlet {
 
 			int quantity = Integer.parseInt(request.getParameter("quantity"));
 			String name = (String) session.getAttribute("User");
-			UserDAOImpl userDao = new UserDAOImpl();
+	
 
 			double retailPrice = Double.parseDouble(session.getAttribute("Price").toString());
 
@@ -37,22 +36,20 @@ public class OrderSucessServlet extends HttpServlet {
 			session.setAttribute("TotalPrice", totalPrice);
 			request.setAttribute("TotalPrice", totalPrice);
 
-			System.out.println("price" + totalPrice);
+		
 
 			WalletDAOImpl walletDao = new WalletDAOImpl();
 
-			int Wallet;
+			int wallet;
 			int userId = Integer.parseInt(session.getAttribute("userId").toString());
-			Wallet = walletDao.walletbal(userId);
+			wallet = walletDao.walletbal(userId);
 
-			double wallbal = Wallet - totalPrice;
+			double wallbal = wallet - totalPrice;
 
 			session.setAttribute("wallbal", wallbal);
 			request.setAttribute("wallbal", wallbal);
 
-			Date order = (Date) session.getAttribute("orderDate");
-
-			walletDao.updatewallet(wallbal, userId);
+		    walletDao.updatewallet(wallbal, userId);
 
 			int flowerId = Integer.parseInt(session.getAttribute("FlowerId").toString());
 			session.setAttribute("flower_id", flowerId);

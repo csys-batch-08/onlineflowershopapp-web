@@ -1,10 +1,7 @@
 package com.onlineflowershop.servlet;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -25,8 +22,8 @@ public class SalesHistoryServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			CartDAOImpl CartDao = new CartDAOImpl();
-			List<Cart> orderlist = CartDao.showCart();
+			CartDAOImpl cartDao = new CartDAOImpl();
+			List<Cart> orderlist = cartDao.showCart();
 
 			request.setAttribute("showCart", orderlist);
 			RequestDispatcher rd = request.getRequestDispatcher("salesHistory.jsp");

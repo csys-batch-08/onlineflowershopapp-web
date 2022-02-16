@@ -51,12 +51,10 @@ public class LoginServlet extends HttpServlet {
 				}
 
 				else if (role.equals("user")) {
-
-					session.setAttribute("currentUser1", currentUser.getName());
-
 					WalletDAOImpl WalletBal = new WalletDAOImpl();
 					int walletBallance = WalletBal.walletbal(userId);
-
+					session.setAttribute("currentUser1", currentUser.getName());
+                    session.setAttribute("walletBallance", walletBallance);
 					response.sendRedirect("ShowProductServlet");
 
 				}

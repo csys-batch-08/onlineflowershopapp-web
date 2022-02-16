@@ -23,9 +23,9 @@ public class RegisterServlet extends HttpServlet {
 		String emailId = request.getParameter("emailId");
 		String password = request.getParameter("password");
 		String address = request.getParameter("address");
-		long Mobilenumber = Long.parseLong(request.getParameter("Mobilenumber"));
+		long mobilenumber = Long.parseLong(request.getParameter("Mobilenumber"));
 
-		User objUserRegister = new User(name, emailId, password, address, Mobilenumber);
+		User objUserRegister = new User(name, emailId, password, address, mobilenumber);
 
 		UserDAOImpl user = new UserDAOImpl();
 
