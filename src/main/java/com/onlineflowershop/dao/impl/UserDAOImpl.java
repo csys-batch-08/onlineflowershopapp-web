@@ -51,7 +51,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User validateUser(String emailId, String password) throws SQLException {
-		String validateQuery = "select user_id,name,email_id,password,address,mobile_number,role,walllet from user_details where email_id=? password=? ";
+		String validateQuery = "select user_id,name,email_id,password,address,mobile_number,role,walllet from user_details where email_id=? and password=? ";
 
 		Connection con = null;
 		User user = null;
