@@ -107,4 +107,4 @@ drop table cart_items cascade constraints;
 
 commit;
 
-select * from user_details where email_id='prem@gmail.com' and password='jeev0702';s
+select * from user_details where email_id='prem@gmail.com' and password='jeev0702';
