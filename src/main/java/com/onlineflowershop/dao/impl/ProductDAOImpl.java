@@ -21,7 +21,7 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<Product> viewProduct() throws SQLException {
 		List<Product> inventorylist = new ArrayList<>();
 
-		String showQurey = "select flower_id,flower_name,flower_description,color,retail_price,category_name,rating,picture from inventory";
+		String showQurey = "select flower_id,flower_name,flower_description,color,retail_price,category_name,rating,picture from inventory ";
 		Connection con = null;
 		PreparedStatement stmt = null;
 
@@ -224,7 +224,7 @@ public class ProductDAOImpl implements ProductDAO {
 			con = ConnectionUtil.getDbConnection();
 			stmt = con.prepareStatement(pricequery);
 			stmt.setInt(1, productId);
-            ResultSet rs=stmt.executeQuery();
+            stmt.executeQuery();
 		} catch (SQLException e) {
 			e.getMessage();
 		} finally {

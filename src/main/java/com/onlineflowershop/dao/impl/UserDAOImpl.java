@@ -189,7 +189,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public int findUserId(String Name) throws SQLException {
 
-		String findUserID = "select user_id from user_details where name='" + Name + "'";
+		String findUserID = "select user_id from user_details where name= ?";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
