@@ -74,25 +74,8 @@ public class User implements Serializable {
 		public void setMobileNumber(long mobileNumber) {
 			this.mobileNumber = mobileNumber;
 		}
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((address == null) ? 0 : address.hashCode());
-			result = prime * result + ((emailId == null) ? 0 : emailId.hashCode());
-			result = prime * result + (int) (mobileNumber ^ (mobileNumber >>> 32));
-			result = prime * result + ((name == null) ? 0 : name.hashCode());
-			result = prime * result + ((password == null) ? 0 : password.hashCode());
-			result = prime * result + ((role == null) ? 0 : role.hashCode());
-			result = prime * result + userId;
-			long temp;
-			temp = Double.doubleToLongBits(wallet);
-			result = prime * result + (int) (temp ^ (temp >>> 32));
-			return result;
-		}
-	
 		
-		@Override
+	    @Override
 		public String toString() {
 			return "User [userId=" + userId + ", name=" + name + ", emailId=" + emailId + ", password=" + password
 					+ ", address=" + address + ", mobileNumber=" + mobileNumber + ", role=" + role + ", wallet="
