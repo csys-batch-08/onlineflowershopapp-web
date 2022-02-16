@@ -35,7 +35,10 @@ public class HomeServlet extends HttpServlet {
 			session.setAttribute("productsList", productsList);
 			response.sendRedirect("home.jsp");
 
+		} catch (IOException e) {
+			e.getMessage();
 		} catch (SQLException e) {
+			
 			e.getMessage();
 		}
 	}
