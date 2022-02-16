@@ -29,16 +29,14 @@ public class HomeServlet extends HttpServlet {
 			productsList = (List<Product>) proDao.viewProduct();
 
 			for (int i = 0; i < productsList.size(); i++) {
-				System.out.println(productsList.get(i));
-
-			}
+				}
 
 			HttpSession session = request.getSession();
 			session.setAttribute("productsList", productsList);
 			response.sendRedirect("home.jsp");
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			e.getMessage();
 		}
 	}
 
