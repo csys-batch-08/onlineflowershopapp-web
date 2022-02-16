@@ -1,7 +1,7 @@
 package com.onlineflowershop.servlet;
 
 import java.io.IOException;
-import java.sql.Date;
+
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;

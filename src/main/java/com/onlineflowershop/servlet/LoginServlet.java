@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import com.onlineflowershop.dao.impl.UserDAOImpl;
 import com.onlineflowershop.dao.impl.WalletDAOImpl;
-import com.onlineflowershop.exception.UserException;
 import com.onlineflowershop.model.User;
 
 @WebServlet("/LoginServlet")
@@ -47,13 +46,11 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("userId", userId);
 
 				if (role.equals("Admin")) {
-					System.out.println("admin");
+					
 					response.sendRedirect("admin.jsp");
 				}
 
 				else if (role.equals("user")) {
-
-					session.setAttribute("currentUser1", currentUser.getName());
 
 					session.setAttribute("currentUser1", currentUser.getName());
 
