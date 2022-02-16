@@ -368,17 +368,17 @@ public class ProductDAOImpl implements ProductDAO {
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
-				Product flower = new Product();
-				flower.setFlowerId(rs.getInt(1));
-				flower.setFlowerName(rs.getString(2));
-				flower.setFlowerDescription(rs.getString(3));
-				flower.setColor(rs.getString(4));
-				flower.setRetailPrice(rs.getDouble(5));
-				flower.setCatName(rs.getString(6));
-				flower.setRating(rs.getDouble(7));
-				flower.setPicture(rs.getString(8));
+				Product bloom = new Product();
+				bloom.setFlowerId(rs.getInt(1));
+				bloom.setFlowerName(rs.getString(2));
+				bloom.setFlowerDescription(rs.getString(3));
+				bloom.setColor(rs.getString(4));
+				bloom.setRetailPrice(rs.getDouble(5));
+				bloom.setCatName(rs.getString(6));
+				bloom.setRating(rs.getDouble(7));
+				bloom.setPicture(rs.getString(8));
 
-				viewCategory.add(flower);
+				viewCategory.add(bloom);
 			}
 
 		} catch (SQLException e) {
