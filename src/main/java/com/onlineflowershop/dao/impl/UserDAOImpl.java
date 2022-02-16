@@ -51,19 +51,18 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User validateUser(String emailId, String password) throws SQLException {
-		String validateQuery = "select user_id,name,email_id,password,address,mobile_number,role,walllet from user_details where email_id='"
-				+ emailId + "'and password='" + password + "'";
+		String validateQuery = "select user_id,name,email_id,password,address,mobile_number,role,walllet from user_details where email_id=? password=? ";
 
 		Connection con = null;
 		User user = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		
 
 		try {
 
 			con = ConnectionUtil.getDbConnection();
 			pstmt = con.prepareStatement(validateQuery);
-			rs = pstmt.executeQuery();
+		    ResultSet rs=pstmt.executeQuery();
 			if (rs.next()) {
 				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getLong(6), rs.getString(7), rs.getDouble(8));
