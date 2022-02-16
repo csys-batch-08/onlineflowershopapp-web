@@ -39,7 +39,7 @@ body {
 			<c:forEach var="view" items="${showCategory}">
 
 				<tr>
-					<td><img src="${view.picture}" width="200" height="200"></td>
+					<td><img  alt="img" src="${view.picture}" width="200" height="200"></td>
 					<td style="color: black">${view.flowerName}</td>
 					<td style="color: black">${view.flowerDescription}</td>
 					<td style="color: black">${view.color}</td>

@@ -18,10 +18,10 @@ body {
 <body>
 	<form>
 		<h3>
-			<i>your Rating was Added Successfully!!</i>
+			<em>your Rating was Added Successfully!!</em>
 		</h3>
 		<h2>
-			<i>Highly Rated Flower</i>
+			<em>Highly Rated Flower</em>
 		</h2>
 		<table align="left" border="5">
 			<tr>

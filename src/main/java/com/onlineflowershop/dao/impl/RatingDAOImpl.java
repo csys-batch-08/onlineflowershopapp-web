@@ -26,11 +26,11 @@ public class RatingDAOImpl implements RatingDAO {
 
 			e.getMessage();
 		} finally {
-			if (con != null) {
-				con.close();
-			}
 			if (pstmt != null) {
 				pstmt.close();
+			}
+			if (con != null) {
+				con.close();
 			}
 		}
 
@@ -56,11 +56,11 @@ public class RatingDAOImpl implements RatingDAO {
 
 			e.getMessage();
 		} finally {
-			if (con != null) {
-				con.close();
-			}
 			if (stmt != null) {
 				stmt.close();
+			}
+			if (con != null) {
+				con.close();
 			}
 		}
 		return rating;

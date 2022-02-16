@@ -44,9 +44,7 @@ body {
 			Admin</a>
 	</div>
 
-	<table border="2">
-		<tr>
-			<fieldset id="box">
+	       <fieldset id="box"><legend>Update Product</legend>
 				
 					<form action="UpdateProductServlet" method="post">
 

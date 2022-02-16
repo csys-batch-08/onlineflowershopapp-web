@@ -38,7 +38,7 @@ body {
 		<a href="admin.jsp">Back To Admin</a>
 
 	</div>
-	<fieldset id="box">
+	<fieldset id="box"><legend>New Product Update</legend>
 
 			<form action="AddProductServlet" method="post">
 

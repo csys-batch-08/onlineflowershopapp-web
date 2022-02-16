@@ -61,23 +61,23 @@ body {
 		<legend>Edit Here</legend>
 		<a href="ShowUser">
 			<button type="submit" id="button">
-				<i>ShowUser</i>
+				<em>ShowUser</em>
 			</button>
 		</a><br> <a href="SalesHistoryServlet">
 			<button type="submit" id="button">
-				<i>SalesHistory</i>
+				<em>SalesHistory</em>
 			</button>
 		</a><br> <a href="updateProduct.jsp">
 			<button type="submit" id="button">
-				<i>UpdateProduct</i>
+				<em>UpdateProduct</em>
 			</button>
 		</a><br> <a href="addProduct.jsp">
 			<button type="submit" id="button">
-				<i> AddProduct</i>
+				<em> AddProduct</em>
 			</button>
 		</a><br> <a href="deleteProduct.jsp">
 			<button type="submit" id="button">
-				<i>DeleteProduct</i>
+				<em>DeleteProduct</em>
 			</button>
 		</a><br>
 

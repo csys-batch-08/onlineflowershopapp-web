@@ -87,7 +87,7 @@ public class UserDAOImpl implements UserDAO {
 
 	// show all user method
 	@Override
-	public List<User> showUser() {
+	public List<User> showUser() throws SQLException {
 
 		List<User> userlist = new ArrayList<>();
 
@@ -117,6 +117,13 @@ public class UserDAOImpl implements UserDAO {
 		} catch (SQLException e) {
 
 			e.getMessage();
+		}finally {
+			if(stmt!=null) {
+				stmt.close();
+			}
+			if(con !=null) {
+				con.close();
+			}
 		}
 		return userlist;
 	}
@@ -183,12 +190,13 @@ public class UserDAOImpl implements UserDAO {
 	public int findUserId(String Name) throws SQLException {
 
 		String findUserID = "select user_id from user_details where name='" + Name + "'";
-		Connection con = ConnectionUtil.getDbConnection();
+		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		int userId = 0;
 		try {
+			con = ConnectionUtil.getDbConnection();
 			pstmt = con.prepareStatement(findUserID);
 
 			rs = pstmt.executeQuery();
@@ -212,46 +220,7 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
-//get wallet balance:
-	@Override
-	public ResultSet walletbal(int id) {
-		ResultSet rs = null;
-		try {
-			Connection con = ConnectionUtil.getDbConnection();
+	
 
-			String query = "select user_wallet from user_details where user_id = ?";
-			PreparedStatement statement = con.prepareStatement(query);
-			statement.setInt(1, id);
-			rs = statement.executeQuery();
-
-		} catch (SQLException e) {
-
-			e.getMessage();
-		}
-		return rs;
-	}
-
-	// update wallet balance:
-	@Override
-	public int updatewallet(int amount, int userid) {
-
-		Connection con = ConnectionUtil.getDbConnection();
-		int res = 0;
-		try {
-			String query = "update user_details set user_wallet = ? where user_id = ?";
-			PreparedStatement statement = con.prepareStatement(query);
-			statement.setInt(1, amount);
-			statement.setInt(2, userid);
-
-			res = statement.executeUpdate();
-		} catch (SQLException e) {
-
-			e.getMessage();
-
-		}
-
-		return res;
-
-	}
 
 }

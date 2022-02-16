@@ -12,7 +12,7 @@ public interface UserDAO {
 
 	public User validateUser(String emailId, String password) throws SQLException;
 
-	public List<User> showUser();
+	public List<User> showUser() throws SQLException;
 
 	public void update(String update) throws SQLException;
 
@@ -20,8 +20,6 @@ public interface UserDAO {
 
 	public int findUserId(String userName) throws SQLException;
 
-	public ResultSet walletbal(int id);
-
-	public int updatewallet(int amount, int userid);
+	
 
 }

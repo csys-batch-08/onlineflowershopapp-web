@@ -49,11 +49,11 @@ public class ProductDAOImpl implements ProductDAO {
 
 			e.getMessage();
 		} finally {
-			if (con != null) {
-				con.close();
-			}
 			if (stmt != null) {
 				stmt.close();
+			}
+			if (con != null) {
+				con.close();
 			}
 		}
 
@@ -184,14 +184,14 @@ public class ProductDAOImpl implements ProductDAO {
 		Connection con = null;
 		PreparedStatement stmt = null;
 		int proId = 0;
-		ResultSet rs = null;
+
 		
 
 		try {
 			con = ConnectionUtil.getDbConnection();
 			stmt = con.prepareStatement(selectquery);
 			stmt.setString(1, productName);
-            stmt.executeUpdate();
+			ResultSet rs=stmt.executeQuery();
 			if (rs.next()) {
 				proId = rs.getInt(1);
 			}

@@ -44,7 +44,7 @@ body {
 			Admin</a>
 	</div>
 
-	<fieldset id="box">
+	<fieldset id="box"><legend>Remove Product</legend>
 		<form action="DeleteProductServlet" method="post">
 
 			FlowerId:<input type="number" name="FlowerId"><br><br>
