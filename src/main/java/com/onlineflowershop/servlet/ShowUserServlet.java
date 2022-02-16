@@ -36,6 +36,9 @@ public class ShowUserServlet extends HttpServlet {
 		} catch (IOException e) {
 
 			e.getMessage();
+		} catch (SQLException e) {
+		
+			e.getMessage();
 		}
 	}
 
