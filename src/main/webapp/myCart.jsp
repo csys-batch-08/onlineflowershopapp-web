@@ -60,6 +60,7 @@ body {
 				<th>Flower Name</th>
 				<th>Order quantity</th>
 				<th>Total price</th>
+				<th>Order Date</th>
 
 			</tr>
 			<c:forEach var="show" items="${viewOrder}">
@@ -68,6 +69,7 @@ body {
 					<td>${show.flowerName}</td>
 					<td>${show.orderQuantity}</td>
 					<td>${show.totalPrice}</td>
+					<td>${show.orderDate}</td>
 
 				</tr>
 			</c:forEach>

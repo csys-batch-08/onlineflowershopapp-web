@@ -2,7 +2,6 @@ package com.onlineflowershop.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

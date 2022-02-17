@@ -21,11 +21,11 @@ public class UpdateProductServlet extends HttpServlet {
 		try {
 			
 			ProductDAOImpl productDao = new ProductDAOImpl();
-			String new_Flower_Name = request.getParameter("newflowerName");
-			String old_Flower_Name = request.getParameter("oldflowerName");
+			String newFlowerName = request.getParameter("newflowerName");
+			String oldFlowerName = request.getParameter("oldflowerName");
 			int id;
-			id = productDao.findProductId1(old_Flower_Name);
-			productDao.updateProduct(new_Flower_Name, id);
+			id = productDao.findProductId1(oldFlowerName);
+			productDao.updateProduct(newFlowerName, id);
 			response.sendRedirect("admin.jsp");
 		} catch (SQLException e) {
 

@@ -14,13 +14,10 @@ public class ConnectionUtil {
 
 			Class.forName("oracle.jdbc.OracleDriver");
 			return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "oracle");
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException | SQLException e) {
 			e.getMessage();
 			
-		} catch (SQLException e) {
-			e.getMessage();
-			
-		}
+		} 
 		return null;
 	}
 
