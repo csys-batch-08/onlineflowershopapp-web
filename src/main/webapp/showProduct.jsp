@@ -70,8 +70,9 @@ body {
 <body>
 	<div class="topnav">
 
-		<a href="CategoryServlet">Category</a> <a href="MyCart">My Order</a> <a
-			href="home.jsp">Back To Home </a>
+		<a href="CategoryServlet">Category</a>
+		 <a href="MyCart">My Order</a>
+			<a href="home.jsp">Back To Home </a>
 		
 		<form>
 

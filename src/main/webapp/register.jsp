@@ -69,24 +69,14 @@ a {
 	<form action="RegisterServlet" method="post">
 		<div class="container">
 			<div class="card">
-				<input type="text" name="name" placeholder="Name" autofocus Required><br>
-				<input type="emailId" name="emailId"
-					placeholder="Email_id" pattern="[A-Za-z0-9]+[@][a-zA-Z]+[.][a-z]+"
-					Required><br>
-				 <input type="password" name="password"
-					placeholder="Password" pattern="[a-z0-9]{8}" Required><br>
-				 <input type="text" name="address" placeholder="address "
-					pattern="[0-9a-z]+[,][A-Za-z]+[,][0-9]{6}" Required><br>
-				<input type="Mobilenumber" name="Mobilenumber"
-					placeholder="mobilenumber" pattern="[0-9]{10}" Required><br>
-				<br>
+				<input type="text" name="name" placeholder="Name" autofocus Required><br><br>
+				   <input type="emailId" name="emailId"placeholder="Email_id" pattern="[A-Za-z0-9]+[@][a-zA-Z]+[.][a-z]+"Required><br><br>
+				       <input type="password" name="password" placeholder="Password" pattern="[a-z0-9]{8}" Required><br><br>
+				           <input type="text" name="address" placeholder="address" pattern="[0-9a-z]+[,][A-Za-z]+[,][0-9]{6}" Required><br><br>
+				               <input type="Mobilenumber" name="Mobilenumber" placeholder="mobilenumber" pattern="[0-9]{10}" Required><br>
 
-				<button type="submit" id="button">Register</button>
-				<br>
-				<br>
-				<button type="reset" id="button">Reset</button>
-				<br>
-				<br>
+				                <button type="submit" id="button">Register</button><br><br>
+				               <button type="reset" id="button">Reset</b><br><br>
 	</form>
 	</div>
 	</div>

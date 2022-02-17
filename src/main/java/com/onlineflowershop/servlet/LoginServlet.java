@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 				String user = currentUser.getName();
 				String email = currentUser.getEmailId();
 				session.setAttribute("emailId", email);
-
+                session.setAttribute("password", password);
 				session.setAttribute("username", user);
 				int userId = currentUser.getUserId();
 

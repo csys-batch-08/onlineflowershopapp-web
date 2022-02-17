@@ -43,7 +43,8 @@ table {
 </head>
 <body>
 	<div class="topnav">
-    <a href="MyCart">My Order</a> <a href="home.jsp">Back To Home</a>
+    <a href="MyCart">My Order</a> 
+      <a href="home.jsp">Back To Home</a>
 	</div>
 
 	<form>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<htmllang"en">
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Home page</title>
@@ -46,9 +46,9 @@ h1 {
 		<em>Welcome To My Bloom Shop</em>
 	</h1>
 	<div class="topnav">
-		<a class="active" href="login.jsp">Login</a> <a href="register.jsp">Register</a>
-		<a href="aboutUs.jsp">About Us</a> <a href="checkWallet">Recharge
-			Wallet</a>
+		<a class="active" href="login.jsp">Login</a> 
+		<a href="register.jsp">Register</a>
+		<a href="aboutUs.jsp">About Us</a> 
 	</div>
 </body>
 </html>

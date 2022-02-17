@@ -18,6 +18,24 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+.topnav {
+	background-color: gray;
+	overflow: hidden;
+}
+
+.topnav a {
+	float: left;
+	color: pink;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+.topnav a:hover {
+	background-color: pink;
+	color: black;
+}
 </style>
 
 <meta charset="ISO-8859-1">
@@ -56,5 +74,6 @@ body {
 		</table>
 
 	</form>
+	<a href="home.jsp">Back To Home</a>
 </body>
 </html>

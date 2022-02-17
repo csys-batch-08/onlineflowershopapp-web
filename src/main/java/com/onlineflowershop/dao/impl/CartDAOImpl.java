@@ -178,8 +178,8 @@ public class CartDAOImpl implements CartDAO {
 	public List<Cart> showUserCart(int userId) throws SQLException {
 
 		List<Cart> orderlist = new ArrayList<>();
-		String userCart = "select cart_id,email_id,flower_name,order_quantity,total_price,order_date from cart_items inner join user_details using (user_id)inner join inventory using(flower_id) where user_id=?";
-
+		String userCart="select cart_id,email_id,flower_name,order_quantity,total_price,order_date from cart_items inner join user_details using (user_id) inner join inventory using(flower_id) where user_id=?";
+				
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -202,7 +202,7 @@ public class CartDAOImpl implements CartDAO {
 				orderlist.add(cart);
 
 			}
-			return orderlist;
+			
 
 		} catch (SQLException e) {
 

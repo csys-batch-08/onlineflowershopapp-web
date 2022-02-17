@@ -33,7 +33,7 @@ public class MyCartServlet extends HttpServlet {
 			orderlist = cartDao.showUserCart(userId);
 
 			request.setAttribute("viewOrder", orderlist);
-			String emailId = session.getAttribute("CurrentUser").toString();
+			String emailId = session.getAttribute("currentUser").toString();
 			request.setAttribute("userName", emailId);
 			session.setAttribute("userName", emailId);
 			RequestDispatcher rd = request.getRequestDispatcher("myCart.jsp");

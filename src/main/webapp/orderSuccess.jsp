@@ -42,14 +42,24 @@ body {
 h1 {
 	margin-top: 200px;
 }
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  
+}
+
 </style>
 
 <meta charset="ISO-8859-1">
 <title>Order success page</title>
 </head>
 <body>
+
 	<div class="topnav">
-		<a href="home.jsp">Log Out</a> <a href="MyCart"> My Order</a>
+		<a href="home.jsp">Log Out</a> 
+		<a href="MyCart"> My Order</a>
 	</div>
 
 	<h1>Your Order is Placed Successfully!! Thank You!!</h1>
@@ -60,8 +70,11 @@ h1 {
 	<h2>
 		<em> Your Wallet Ballance Amount is: ${wallbal}</em>
 	</h2>
+	
 	<form action="ratingHere.jsp" metohd="post">
-		<button type="submit" name="button">Rating</button>
+	<div class= center>
+	
+		<button type="submit" name="button">Rating</button></div>
 		<br> <br>
 
 

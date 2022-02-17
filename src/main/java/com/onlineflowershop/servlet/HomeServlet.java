@@ -20,13 +20,15 @@ public class HomeServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException,IOException {
 
 		ProductDAOImpl proDao = new ProductDAOImpl();
-
+    
 		List<Product> productsList;
-		try {
-			productsList =proDao.viewProduct();
+		
+			try {
+				productsList =proDao.viewProduct();
+			
 
 			for (int i = 0; i < productsList.size(); i++) {
 				}
@@ -35,9 +37,9 @@ public class HomeServlet extends HttpServlet {
 			session.setAttribute("productsList", productsList);
 			response.sendRedirect("home.jsp");
 
-		}catch(SQLException e) {
+		}catch(IOException | SQLException e ) {
 			e.getMessage();
 		}
-	}
+	}}
 
-}
+
